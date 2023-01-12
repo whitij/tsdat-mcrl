@@ -1,0 +1,15 @@
+classname: pipelines.cdom.pipeline.CDOM
+
+triggers:
+  - .*cdom.*.log
+
+retriever:
+  path: pipelines/cdom/config/retriever.yaml
+
+dataset:
+  path: pipelines/cdom/config/dataset.yaml
+
+quality:
+  path: shared/quality.yaml
+storage:
+  path: pipelines/cdom/config/storage.yaml

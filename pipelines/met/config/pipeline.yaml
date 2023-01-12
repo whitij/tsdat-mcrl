@@ -1,0 +1,15 @@
+classname: pipelines.met.pipeline.MET
+
+triggers:
+  - .*met.*\.log
+
+retriever:
+  path: pipelines/met/config/retriever.yaml
+
+dataset:
+  path: pipelines/met/config/dataset.yaml
+
+quality:
+  path: shared/quality.yaml
+storage:
+  path: pipelines/met/config/storage.yaml

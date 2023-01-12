@@ -1,0 +1,15 @@
+classname: pipelines.ctd.pipeline.CTD
+
+triggers:
+  - .*ctd.*.log
+
+retriever:
+  path: pipelines/ctd/config/retriever.yaml
+
+dataset:
+  path: pipelines/ctd/config/dataset.yaml
+
+quality:
+  path: shared/quality.yaml
+storage:
+  path: pipelines/ctd/config/storage.yaml

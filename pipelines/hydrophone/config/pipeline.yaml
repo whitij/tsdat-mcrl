@@ -1,0 +1,15 @@
+classname: pipelines.hydrophone.pipeline.Hydrophone
+
+triggers:
+  - .*\\SCF.*.txt
+
+retriever:
+  path: pipelines/hydrophone/config/retriever.yaml
+
+dataset:
+  path: pipelines/hydrophone/config/dataset.yaml
+
+quality:
+  path: shared/quality.yaml
+storage:
+  path: pipelines/hydrophone/config/storage.yaml

@@ -1,0 +1,15 @@
+classname: pipelines.par.pipeline.PAR
+
+triggers:
+  - .*par.*.log
+
+retriever:
+  path: pipelines/par/config/retriever.yaml
+
+dataset:
+  path: pipelines/par/config/dataset.yaml
+
+quality:
+  path: shared/quality.yaml
+storage:
+  path: pipelines/par/config/storage.yaml

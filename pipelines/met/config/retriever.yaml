@@ -1,0 +1,43 @@
+classname: tsdat.io.retrievers.DefaultRetriever
+readers:
+  .*:
+    classname: pipelines.met.readers.METReader
+
+coords:
+  time:
+    name: time
+    data_converters:
+      - classname: tsdat.io.converters.StringToDatetime
+        format: "%Y-%m-%d %H:%M:%S"
+        timezone: UTC
+
+data_vars:
+  windspeed_avg:
+    name: WindSpeed_Avg
+  windspeed_max:
+    name: WindSpeed_Max
+  winddir:
+    name: WindDir
+  airtemp_avg:
+    name: AirTemp_Avg
+  rh:
+    name: RH
+  rain:
+    name: Precip_Tot
+  par_avg:
+    name: PAR_Den_Avg
+  par_tot:
+    name: PAR_Tot
+  baro_pressure:
+    name: BP_Avg
+  baro_temp:
+    name: BP_Temp_Avg
+  baro_qual_metric:
+    input:
+      name: BP_Qual_Min
+  lower_par:
+    input:
+      name: PAR_lower_Avg
+  upper_par:
+    input:
+      name: PAR_upper_Avg

@@ -1,0 +1,15 @@
+classname: pipelines.ph.pipeline.PH
+
+triggers:
+  - .*\\ph.*.txt
+
+retriever:
+  path: pipelines/ph/config/retriever.yaml
+
+dataset:
+  path: pipelines/ph/config/dataset.yaml
+
+quality:
+  path: shared/quality.yaml
+storage:
+  path: pipelines/ph/config/storage.yaml

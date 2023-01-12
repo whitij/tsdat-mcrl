@@ -1,0 +1,22 @@
+classname: tsdat.io.retrievers.DefaultRetriever
+readers:
+  .*:
+    classname: pipelines.par.readers.PARReader
+
+coords:
+  time:
+    .*:
+      name: time
+      data_converters:
+        - classname: tsdat.io.converters.StringToDatetime
+          format: "%Y-%m-%d %H:%M:%S"
+          timezone: UTC
+
+data_vars:
+  lower_par:
+    .*:
+      name: lower_par
+      
+  upper_par:
+    .*:
+      name: upper_par

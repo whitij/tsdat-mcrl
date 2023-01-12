@@ -1,0 +1,247 @@
+attrs:
+  # https://ioos.github.io/ioos-metadata/ioos-metadata-profile-v1-2.html
+  # https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3
+  # Dataset Description
+  conventions: "CD-1.6, ACDD-1.3, IOOS-1.2"
+  featureType: timeseries
+  id: MCRLdata_met
+  infoURL: https://www.osti.gov/biblio/1842840
+  license: Freely Distributed
+  naming_authority: gov.pnnl.sequim
+  standard_name_vocabulary: CF Standard Name Table v79
+  title: MCRLdata at PNNL-Sequim - Meteorology
+  # TODO: Change to "Summary" to meet standards
+  description: "Several weather station instruments were set up on the Marine and Coastal Research 
+  Laboratory (MCRL) pier at the Pacific Northwest National Laboratory (PNNL) campus in Sequim, Washington. 
+  This included a Campbell Scientific wind monitor, BaroVUE10 barometer, HygroVUE10 humidity sensor, 
+  Li-COR LI190SB Quantum Sensor, and TE525 Tipping Bucket Rain Gauge all connected to a CR1000X datalogger. 
+  These instruments provide data about the local weather. This deployment is part of the MCRLdata project to 
+  establish long-term marine monitoring at the PNNL-Sequim Campus."
+  keywords: Sequim, data, marine, weather station, meteorology, wind, rain, humidity, light
+  
+  # Attribution
+  creator_country: USA
+  creator_email: mcrldata at pnnl.gov
+  creator_institution: Pacific Northwest National Laboratory (PNNL) - Sequim
+  creator_institution_url: https://www.pnnl.gov/
+  creator_sector: other
+  creator_type: institution
+  creator_url: https://www.pnnl.gov/
+  institution: Pacific Northwest National Laboratory (PNNL)
+  publisher_country: USA
+  publisher_email: mcrldata at pnnl.gov
+  publisher_institution: Pacific Northwest National Laboratory (PNNL) - Sequim
+  publisher_url: https://www.pnnl.gov/
+  
+  # Platform and Instrument
+  platform: pier
+  platform_name: mcrl_pier
+  platform_vocabulary: https://mmisw.org/ont/ioos/platform
+  instrument: In Situ/Laboratory Instruments > Current/Wind Meters > Wind Monitor
+  instrument_vocabulary: GCMD Instrument Keywords #https://gcmd.earthdata.nasa.gov/KeywordViewer/
+  make_model: Campbell Scientific Weather Station with CR1000X Datalogger
+  
+  # Geospatial and Time
+  geospatial_bounds: POINT(48.07927 -123.04506)
+  geospatial_bounds_crs: "EPSG:4326"
+  time_coverage_start: "2021-10-15"
+  time_coverage_resolution: "5:00"
+
+  # TODO: Can we delete these? Part of storage location and file name right now...
+  location_id: met
+  dataset_name: mcrl_pier
+  qualifier: campbell_cr1000_1
+  temporal: 5min
+  data_level: a1
+
+coords:
+  time:
+    dims: [time]
+    dtype: datetime64[s]
+    attrs:
+      long_name: Time (UTC)
+      standard_name: time
+      units: seconds since 1970-01-01 00:00:00
+      cf_role: timeseries_id
+      coverage_content_type: coordinate
+      timezone: UTC
+
+data_vars:
+  windspeed_avg:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Average Wind Speed (m s-1)
+      standard_name: wind_speed
+      units: m s-1
+      coverage_content_type: physicalMeasurement
+      description: "Average wind speed in the sampling window in m/s"
+      fail_min: 0
+      fail_max: 20
+      calibration_date: "2021-10-15"
+
+  windspeed_max:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Maximum Wind Speed (m s-1)
+      standard_name: wind_speed_of_gust
+      units: m s-1
+      coverage_content_type: physicalMeasurement
+      description: "Maximum wind speed in measurement window (gusts)"
+      fail_min: 0
+      fail_max: 30
+      calibration_date: "2021-10-15"
+
+  winddir:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Wind Direction (deg)
+      standard_name: wind_from_direction
+      units: degree
+      coverage_content_type: physicalMeasurement
+      description:
+        "Wind direction measured by wind vane. There is a sensor blind spot between 355
+        and 360 degrees, in which 0 degrees is returned. Also, some measurement
+        sequences can return negative values. If Wind direction is < 0, wind direction = 0"
+      fail_min: 0
+      fail_max: 360
+      calibration_date: "2021-10-15"
+
+  airtemp_avg:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Average Air Temperature (degC)
+      standard_name: air_temperature
+      units: degree_C
+      coverage_content_type: physicalMeasurement
+      description:
+        "Average ambient air temperature measured by the HygroVUE10. 0.1 degC accuracy
+        20-60 deg C. 0.2 deg C outside of that range. 0.001 deg C resolution"
+      fail_min: -20
+      fail_max: 40
+      calibration_date: "2021-10-15"
+
+  rh:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Relative Humidity (%)
+      standard_name: relative_humidity
+      units: percent
+      coverage_content_type: physicalMeasurement
+      description:
+        "Relative humidity measured by the HygroVUE10. 1.5% accuracy to 80% RH, 2% above
+        80% RH. 0.001% resolution."
+      fail_min: 0
+      fail_max: 100
+      calibration_date: "2021-10-15"
+
+  rain:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Total Rainfall (mm)
+      standard_name: thickness_of_rainfall_amount
+      units: mm
+      description:
+        "Total rainfall in mm measured by the TE525-series tipping bucket rain gage.
+        0-50 degC operating range. 1% accuracy up to 2 in/hr"
+      fail_min: 0
+      fail_max: 10
+      calibration_date: "2021-10-15"
+
+  par_avg:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Average Photosynthetically Active Radiation Flux Density (umol m-2 s-1)
+      standard_name: surface_downwelling_photosynthetic_photon_flux_in_air
+      units: umol m-2 s-1
+      coverage_content_type: physicalMeasurement
+      description: "PAR flux density measured by the Li-COR 190 quantum sensor in air"
+      fail_min: 0
+      fail_max: 1000
+      calibration_date: "2021-10-15"
+
+  par_tot:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Total Photosynthetically Active Radiation (umol m-2)
+      standard_name: surface_downwelling_photosynthetic_photon_flux_in_air
+      units: umol m-2
+      coverage_content_type: physicalMeasurement
+      description: "PAR total flux measured by the Li-COR 190 quantum sensor in air"
+      fail_min: 0
+      fail_max: 500
+      calibration_date: "2021-10-15"
+
+  baro_pressure:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Average Barometric Pressure (hPa)
+      standard_name: air_pressure
+      units: hPa
+      coverage_content_type: physicalMeasurement
+      description:
+        "Barometric pressure measured by the BaroVUEW 10 digital barometer, 0.3 hPa
+        uncertainty at 20 degrees C"
+      fail_min: 800
+      fail_max: 1100
+      calibration_date: "2021-10-15"
+
+  baro_temp:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Average Temperature of Barometer Sensor (degC)
+      standard_name: temperature_of_sensor
+      units: degree_C
+      coverage_content_type: physicalMeasurement
+      description: "Temperature measured by the BaroVUE 10 digital barometer"
+      fail_min: -20
+      fail_max: 40
+
+  baro_qual_metric:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Barometer Quality Metric
+      standard_name: quality_flag
+      units: unitless
+      coverage_content_type: physicalMeasurement
+      description:
+        "Quality metric for BaroVUE barometer. >6, freshly calibrated. 5-5.99, sensor
+        working well. 4-4.99, needs cal in 2-3 months. 0-3.99, needs calibration now."
+      fail_min: 0
+      fail_max: 6
+      
+  lower_par:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Lower Photosynthetically Active Radiation (PAR) Sensor
+      standard_name: downwelling_photon_flux_in_sea_water
+      units: umol m-2 s-1
+      coverage_content_type: physicalMeasurement
+      description: "PAR flux density measured by the Li-COR 193 quantum sensor, lower sensor under sea water"
+      fail_min: 0
+      fail_max: 500
+      calibration_date: "2021-02-04"
+          
+  upper_par:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Upper Photosynthetically Active Radiation (PAR) Sensor
+      standard_name: downwelling_photon_flux_in_sea_water
+      units: umol m-2 s-1
+      coverage_content_type: physicalMeasurement
+      description: "PAR flux density measured by the Li-COR 193 quantum sensor, upper sensor under sea water"
+      fail_min: 0
+      fail_max: 500
+      calibration_date: "2021-01-14"

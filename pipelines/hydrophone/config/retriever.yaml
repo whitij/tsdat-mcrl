@@ -1,0 +1,20 @@
+classname: tsdat.io.retrievers.DefaultRetriever
+readers:
+  .*:
+    classname: pipelines.hydrophone.readers.HydrophoneReader
+
+coords:
+  time:
+    name: time
+    data_converters:
+      - classname: tsdat.io.converters.StringToDatetime
+        format: "%Y-%m-%d %H:%M:%S"
+        timezone: UTC
+  frequency:
+    name: frequency
+
+data_vars:
+  spectra:
+    name: spectra
+  SPL:
+    name: SPL

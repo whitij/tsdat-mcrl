@@ -1,171 +1,198 @@
-# Tsdat AWS Pipeline Template
+# Tsdat Pipeline Template
 
-This project template contains source code and supporting files for running multiple Tsdat pipelines via a single
-serverless (i.e., lambda) application that you can deploy with the AWS SAM CLI. It includes the following files and folders:
+[![tests](https://github.com/tsdat/pipeline-template/actions/workflows/tests.yml/badge.svg)](https://github.com/tsdat/pipeline-template/actions/workflows/tests.yml)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-- lambda_function - Code for the application's Lambda function and Project Dockerfile.  The lambda function can run
-multiple pipelines as defined under the pipelines subfolder.  Each pipeline's code is contained in a further 
-subfolder (e.g., lambda_function/pipelines/a2e_buoy_ingest).  You will need to create a folder for each pipeline that
-you would like to run via this lambda template. The lambda_function/pipelines/runner.py class contains a map of
-regular expressions which are used to map file names of a certain pattern to the pipeline and config files
-that will be used to process that specific file.  The regular expressions will need to be updated to work with your
-input file name patterns.
-- data - Sample data to use for running tests local
-- tests - Unit tests for the application code. `tests/test_pipeline.py` is used to run unit tests on your local filesystem.
-Anyone can run the local filesystem tests.  `tests/test_lambda_function.py` is used to run unit tests against a test
-S3 bucket.  You will need an AWS account and permissions to write to the test bucket in order to run the AWS unit tests.
-- template.yaml - A template that defines the application's AWS resources that will be created/managed in a single
-software stack via AWS Cloud Formation.  This template defines several AWS resources including Lambda functions,
-input/output S3 buckets, and event triggers.  You should modify this template to create the appropriate resources 
-needed for your AWS environment.
-- samconfig.tomal - A config file containing variables specific to the deployment such as input/output bucket names,
-stack name, and the logging level to use.
+This repository contains a collection of one or more `tsdat` pipelines (as found under the ``pipelines`` folder).  This
+enables related pipelines to be more easily maintained and run together.  New pipelines can be added easily via 
+the template mechanism described below.
+
+## Repository Structure
+
+The repository is made up of the following core pieces:
+
+- **`runner.py`**: Main entry point for running a pipeline.
+
+- **`pipelines/*`**: Collection of custom data pipelines using `tsdat`.
+
+- **`pipelines/example_ingest`**: An out-of-the-box example `tsdat` pipeline.
+
+- **`templates/*`**: Template(s) used to generate new pipelines.
+
+- **`shared/*`**: Shared configuration files that may be used across multiple pipelines.
+
+- **`utils/*`**: Utility scripts.
 
 ## Prerequisites
-Anyone can edit pipeline code in this template, however the following are required in order to deploy your 
-pipeline to AWS:
 
-### 1) Create an AWS account.
-Necessary for admins who will deploy your application to AWS
-
-### 2) Configure IAM permissions for your acount.
-Necessary for admins who will deploy your application to AWS
-
-### 3) Install Docker
-Required to build the AWS Lambda image. [Install Docker community edition](https://hub.docker.com/search/?type=edition&offering=community)
-
-### 4) Install AWS CLI
-Required to deploy the software stack defined in template.yaml
-
-### 5) Install AWS SAM CLI
-Required to deploy the software stack defined in template.yaml
-The Serverless Application Model Command Line Interface (SAM CLI) is an extension of the AWS CLI that
- adds functionality for building and testing Lambda applications. It uses Docker to run your functions in an Amazon
- Linux environment that matches Lambda. It can also emulate your application's build environment and API.
-
-[Install the SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html)
-
-### 6) Install Python & Tsdat
-You will need Python for local testing and development - [Python 3 installed](https://www.python.org/downloads/)
-You will also need Tsdat:
-```bash
-pip install tsdat
-```
-
-## Building your lambda function 
-Use the `sam build` command to build your lambda function for deployment.
-
-```bash
-$ sam build
-```
-
-The SAM CLI builds a docker image from a Dockerfile, copies the source of your application inside the Docker image,
-and then installs dependencies defined in `lambda_function/requirements.txt` 
-inside the docker image. The processed template file is saved in the `.aws-sam/build` folder.
+The following are required to develop a `tsdat` pipeline:
+1. **A GitHub account.** [Click here to create an account if you don't have one already](https://github.com/)
 
 
-## Deploying your lambda function for the first time
-To deploy your application for the first time, run the following in your shell:
+2. **An Anaconda environment.**  We strongly recommend developing in an Anaconda Python environment to ensure
+that there are no library dependency issues.  [Click here for more information on installing Anaconda on your computer](https://docs.anaconda.com/anaconda/install/index.html)
 
-```bash
-sam deploy --guided
-```
-
-This will package and deploy your application to AWS, with a series of prompts:
-
-* **Stack Name**: The name of the stack to deploy to CloudFormation. This should be unique to your account and region, 
-and a good starting point would be something matching your project name.
-* **AWS Region**: The AWS region you want to deploy your app to.
-* **Confirm changes before deploy**: If set to yes, any change sets will be shown to you before execution for manual review.
- If set to no, the AWS SAM CLI will automatically deploy application changes.
-* **Allow SAM CLI IAM role creation**: Many AWS SAM templates, including this example, create AWS IAM roles required for the 
-AWS Lambda function(s) included to access AWS services. By default, these are scoped down to minimum required permissions. 
-To deploy an AWS CloudFormation stack which creates or modified IAM roles, the `CAPABILITY_IAM` value for `capabilities` must be provided. 
-If permission isn't provided through this prompt, to deploy this example you must explicitly pass `--capabilities CAPABILITY_IAM` to 
-the `sam deploy` command.
-* **Save arguments to samconfig.toml**: If set to yes, your choices will be saved to a configuration file inside the project, so that in the future you can just re-run `sam deploy` without parameters to deploy changes to your application.
+    > **Windows Users** - You can install Anaconda directly to your Windows box OR you can run via a linux
+    environment using the Windows Subsystem for Linux (WSL).  See
+    [this tutorial on WSL](https://tsdat.readthedocs.io/en/latest/tutorials/setup_wsl.html) for
+    how to set up a WSL environment and attach VS Code to it.
 
 
-## Deploying your lambda function
-Once you have used `sam deploy --guided` to update your samconfig.toml file, you can deploy with the `sam deploy` command.
+## Creating a repository from the pipeline-template
+You can create a new repository based upon the `tsdat` pipeline-template repository in GitHub:
 
-```bash
-$ sam deploy
-```
-This will package and deploy your built application template to AWS.
+1. Click this '[Use this template](https://github.com/tsdat/pipeline-template/generate)' link and
+follow the steps to copy the template repository into to your account.
+    > **NOTE:** If you are looking to get an older version of the template, you will need to
+    select the box next to 'Include all branches' and set the branch your are interested
+    in as your new default branch.
+
+2. On github click the 'Code' button to get a link to your code, then run 
+    ```
+    git clone <the link you copied>
+    ```
+    from the terminal on your computer where you would like to work on the code.
+
+## Setting up your Anaconda environment
+1. Open a terminal shell from your computer
+   - Linux or Mac: open a regular terminal
+   - Windows: open an Anaconda prompt if you installed Anaconda directly
+   to Windows, OR open a WSL terminal if you installed Anaconda via WSL.
+
+2. Run the following commands to create and activate your conda environment:
+
+    ```bash
+    conda env create --file=conda-environment.yaml
+    conda activate tsdat-pipelines
+    ```
+
+3. Verify your environment is set up correctly by running the tests for this repository:
+    ```bash
+    pytest
+    ```
+
+    If you get the following warning message when running the test:
+    ```bash
+    UserWarning: pyproj unable to set database path.
+    ```
+
+    Then run the following additional commands to permanently remove this warning message:
+    ```bash
+    conda remove --force pyproj
+    pip install pyproj
+    ```
+
+    If everything is set up correctly then all the tests should pass.
+
+## Opening your repository in VS Code
+
+1. Open the cloned repository in VS Code. *(This repository contains default settings for
+VS Code that will make it much easier to get started quickly.)*
+
+2. Install the recommended extensions (there should be a pop-up in VS Code with recommendations).
+
+    **Windows Users**:
+    In order to run python scripts in VSCode, follow steps A-C below:
+
+    A. Install the extension Code Runner (authored by Jun Han).
+
+    B. Press `F1`, type `Preferences: Open User Settings (JSON)` and select it.
+
+    C. Add the following lines to the list of user settings, and update `<path to anaconda>` for
+    your machine:
+    ```bash
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    "python.condaPath": "C:/<path to anaconda>/Anaconda3/python.exe",
+    "python.terminal.activateEnvironment": true,
+    "code-runner.executorMap": {
+        "python": "C:/<path to anaconda>/Anaconda3/Scripts/activate.bat && $pythonPath $fullFileName"
+    },
+    ```
+
+3. Tell VS Code to use your new conda environment:
+    - Press `F1` to bring up the command pane in VS Code
+    - Type `Python: Select Interpreter` and select it.
+    - Select the newly-created `tsdat-pipelines` conda environment from the drop-down list.
+        > You may need to refresh the list (cycle icon in the top right) to see it.
+    - Bring up the command pane and type `Developer: Reload Window` to reload VS Code
+    and ensure the settings changes propagate correctly.
+
+4. Verify your VS Code environment is set up correctly by running the tests for this repository:
+    - Press `F1` to bring up the command pane in VS Code
+    - Type `Test: Run All Tests` and select it
+    - A new window pane will show up on the left of VS Code showing test status
+    - Verify that all tests have passed (Green check marks)
 
 
-## Add a resource to your application
-The application template uses AWS Serverless Application Model (AWS SAM) to define application resources.
-AWS SAM is an extension of AWS CloudFormation with a simpler syntax for configuring common serverless application 
-resources such as functions, triggers, and APIs. For resources not included in 
-[the SAM specification](https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md),
-you can use standard [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
-resource types.
+## Processing Data
 
-## Fetch, tail, and filter Lambda function logs
+- The `runner.py` script can be run from the command line to process input data files:
+    ```
+    python runner.py <path(s) to file(s) to process>
+    ```
+    > The pipeline(s) used to process the data will depend on the specific patterns declared
+    by the `pipeline.yaml` files in each pipeline module in this repository.
 
-To simplify troubleshooting, SAM CLI has a command called `sam logs`. `sam logs` lets you 
-fetch logs generated by your deployed Lambda function from the command line. In addition to printing the logs on the
- terminal, this command has several nifty features to help you quickly find the bug.
+- You can run the example pipeline that comes bundled with this repository by running:
+    ```
+    python runner.py pipelines/example_pipeline/test/data/input/buoy.z06.00.20201201.000000.waves.csv
+    ```
 
-`NOTE`: This command works for all AWS Lambda functions; not just the ones you deploy using SAM.
-
-```bash
-$ sam logs -n HelloWorldFunction --stack-name tsdat-sam-test --tail
-```
-
-You can find more information and examples about filtering Lambda function logs in the 
-[SAM CLI Documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-logging.html).
-
-## Unit tests
-
-Tests are defined in the `tests` folder in this project. 
-`tests/test_pipeline.py` is used to run unit tests on your local filesystem.
-Anyone can run the local filesystem tests.
-
-`tests/test_lambda_function.py` is used to run unit tests against a test
-S3 bucket.  You will need an AWS account and permissions to write to the test bucket in order to run the AWS unit tests.
-
-The `tests/events` folder contains simulated S3 bucket events that are used for running the pipeline tests against
-an AWS S3 bucket.  In order to run  `test_lambda_function.py`, you will need to update the events to match your AWS
-test data that should be deposited in a bucket for which you have read permissions.  Specifically, you will need to
-update the bucket name property and object key property to match your specific test files as shown in the following
-snippet from an event.json file.
-
-```json
-{
-      "s3": {
-        "s3SchemaVersion": "1.0",
-        "configurationId": "4586d195-b484-464c-97f8-027348232818",
-        "bucket": {
-          "name": "a2e-tsdat-test",
-          "ownerIdentity": {
-            "principalId": "A21WSIO2BY6RXE"
-          },
-          "arn": "arn:aws:s3:::a2e-tsdat-test"
-        },
-        "object": {
-          "key": "a2e_buoy_ingest/humboldt/buoy.z05.00.20201201.000000.zip",
-          "size": 3679233,
-          "eTag": "84703366a2bac7da56749b6cdbe37de1",
-          "sequencer": "00606E62D96731561E"
-        }
-      }
-}
-
-```
+    If goes successfully it should output some text, ending with the line:
+    ```
+    Processing completed with 1 successes, 0 failures, and 0 skipped.
+    ```
 
 
-## Cleanup
+- The `runner.py` script can optionally take a glob pattern in addition to a filepath. E.g.,
+to process all 'csv' files in some input folder `data/to/process/` you would run:
+    ```
+    python runner.py data/to/process/*.csv
+    ```
 
-To undeploy your lambda function, use the AWS CLI. Assuming you used your project name for the stack name, you can run the following:
+- The `--help` option can be used to show additional usage information:
+    ```
+    python runner.py --help
+    ```
 
-```bash
-aws cloudformation delete-stack --stack-name ${STACK_NAME}
-```
+## Adding a new pipeline
 
-## Resources
+1. Use a cookiecutter template to generate a new pipeline folder. From your top level
+repository folder run:
 
-See the [AWS SAM developer guide](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html) for an 
-introduction to SAM specification, the SAM CLI, and serverless application concepts.
+    ```bash
+    make cookies
+    ```
+
+    Follow the prompts that appear to generate a new ingestion pipeline. After completing all the
+    prompts cookiecutter will run and your new pipeline code will appear inside the
+    `pipelines/<module_name>` folder.
+
+    > The `make cookies` command is a memorable shortcut for `python templates/generate.py ingest`,
+    which itself is a wrapper around `cookiecutter templates/ingest -o pipelines`. To see more
+    information about the options available for this command run `python templates/generate.py --help`.    
+
+2.  See the README.md file inside that folder for more information on how to configure, run,
+test, and debug your pipeline.
+
+> This repository supports adding as many pipelines as you want - just repeat the steps above.
+
+
+## Additional resources
+
+- Learn more about `tsdat`:
+    - GitHub: https://github.com/tsdat/tsdat
+    - Documentation: https://tsdat.readthedocs.io
+    - Data standards: https://github.com/tsdat/data_standards
+- Learn more about `xarray`: 
+    - GitHub: https://github.com/pydata/xarray
+    - Documentation: https://xarray.pydata.org
+- Learn more about 'pydantic':
+    - GitHub: https://github.com/samuelcolvin/pydantic/
+    - Documentation: https://pydantic-docs.helpmanual.io
+- Other useful tools:
+    - VS Code: https://code.visualstudio.com/docs
+    - Docker: https://docs.docker.com/get-started/
+    - `pytest`: https://github.com/pytest-dev/pytest
+    - `black`: https://github.com/psf/black
+    - `matplotlib` guide: https://realpython.com/python-matplotlib-guide/

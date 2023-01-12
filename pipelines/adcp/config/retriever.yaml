@@ -1,0 +1,42 @@
+classname: tsdat.io.retrievers.DefaultRetriever
+readers:
+  .*:
+    classname: pipelines.adcp.readers.ADCPDataReader
+
+coords:
+  time:
+    name: time
+    data_converters:
+      - classname: tsdat.io.converters.StringToDatetime
+        format: "%Y-%m-%d %H:%M:%S"
+        timezone: UTC
+  range:
+    name: range
+  dir:
+    name: dir
+  beam:
+    name: beam
+
+data_vars:
+  vel:
+    name: vel
+  U_mag:
+    name: U_mag
+  U_dir:
+    name: U_dir
+  amplitude:
+    name: amp
+  temperature:
+    name: temp
+  depth:
+    name: depth
+  heading:
+    name: heading
+  pitch:
+    name: pitch
+  roll:
+    name: roll
+  c_sound:
+    name: c_sound
+  pressure:
+    name: pressure
