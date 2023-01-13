@@ -3,6 +3,7 @@ import re
 from pathlib import Path
 from typing import Dict, List, Pattern
 from tsdat import PipelineConfig, read_yaml
+from shared.writers import write_raw
 
 logger = logging.getLogger(__name__)
 
@@ -83,6 +84,10 @@ class PipelineRegistry:
                         failures += 1
                     else:
                         successes += 1
+
+                    ## Manually move raw file
+                    for f in inputs:
+                        write_raw(f, config, pipeline.__repr_name__().lower())
 
         logger.info(
             "Processing completed with %s successes, %s failures, and %s skipped.",

@@ -1,30 +1,64 @@
+import shutil
 import pandas as pd
 import xarray as xr
 from pathlib import Path
 from pydantic import BaseModel, Extra
 from typing import Any, Dict, List, Optional
+from tstring import Template
 
 from tsdat import FileWriter
 from tsdat.config.storage import StorageConfig
 from tsdat.config.utils import recursive_instantiate
 
 
-def write_parquet(dataset, instrument):
+def create_storage_class(instrument, data_folder):
     parameters = {
-        "bucket": "mcrl-data-test",
-        "region": "us-west-2",
-        "storage_root": instrument,
-        "data_folder": "parquet",
+        "storage_root": Path.cwd() / "storage" / instrument,
+        "data_folder": data_folder,
         "data_storage_path": Path(
             "{storage_root}/{datastream}/{data_folder}/year={year}/month={month}/day={day}"
         ),
     }
     storage_model = StorageConfig(
-        classname="tsdat.io.storage.FileSystemS3", parameters=parameters
+        classname="tsdat.io.storage.FileSystem", parameters=parameters
     )
+    return storage_model
+
+
+def write_raw(input_key, config, instrument):
+    storage_model = create_storage_class(instrument, "raw")
+    storage = recursive_instantiate(storage_model)
+
+    # Can get datastream from pipeline config
+    # Can get year/month/day from input filename b/c log files are always listed in UTC
+    filename = input_key.replace("\\", "/").split("/")[-1]
+    date = filename.split("_")[-2]
+    year = date[:4]
+    month = date[4:6]
+    day = date[6:8]
+
+    # Manually set up save configuration and save raw file
+    data_stub_path = Template(storage.parameters.data_storage_path.as_posix())
+    datastream_dir = Path(
+        data_stub_path.substitute(
+            dict(
+                datastream=config.dataset.attrs.datastream,
+                year=year,
+                month=month,
+                day=day,
+            ),
+        )
+    )
+    filepath = datastream_dir / filename
+    filepath.parent.mkdir(exist_ok=True, parents=True)
+    shutil.move(input_key, filepath)  # save file by moving it from source
+    # Using 'copy' on tsdat-mcrl-local, 'move' on tsdat-mcrl
+
+
+def write_parquet(dataset, instrument):
+    storage_model = create_storage_class(instrument, "parquet")
     storage = recursive_instantiate(storage_model)
     storage.handler.writer = MCRLdataParquetWriter()
-
     storage.save_data(dataset)
 
 
