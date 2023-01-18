@@ -76,7 +76,7 @@ class MCRLdataParquetWriter(FileWriter):
     class Parameters(BaseModel, extra=Extra.forbid):
         dim_order: Optional[List[str]] = None
         to_parquet_kwargs: Dict[str, Any] = {}
-        to_parquet_kwargs.update(dict(engine="pyarrow"))
+        to_parquet_kwargs.update(dict(engine="pyarrow", use_dictionary=False))
 
     parameters: Parameters = Parameters()
     file_extension: str = ".parquet"
@@ -110,14 +110,10 @@ class MCRLdataParquetWriter(FileWriter):
         else:
             df = ds.to_dataframe(self.parameters.dim_order)  # type: ignore
 
-        # Need to iterate through columns and force data types
+        # Need to iterate through columns and force integer data types for qc flag
         for col in df.columns:
-            if "time" in col:
-                continue
-            elif "qc" in col:
+            if "qc" in col:
                 df[col] = pd.to_numeric(df[col])
-            # else:
-            # df[col] = df[col].astype(float)
 
         # print(df)
         df.to_parquet(filepath, **self.parameters.to_parquet_kwargs)
