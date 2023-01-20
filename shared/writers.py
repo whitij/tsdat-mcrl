@@ -13,14 +13,16 @@ from tsdat.config.utils import recursive_instantiate
 
 def create_storage_class(instrument, data_folder):
     parameters = {
-        "storage_root": Path.cwd() / "storage" / instrument,
+        "bucket": "mcrl-data-test",
+        "region": "us-west-2",
+        "storage_root": instrument,
         "data_folder": data_folder,
         "data_storage_path": Path(
             "{storage_root}/{datastream}/{data_folder}/year={year}/month={month}/day={day}"
         ),
     }
     storage_model = StorageConfig(
-        classname="tsdat.io.storage.FileSystem", parameters=parameters
+        classname="tsdat.io.storage.FileSystemS3", parameters=parameters
     )
     return storage_model
 
