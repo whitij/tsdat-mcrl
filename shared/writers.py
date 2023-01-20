@@ -13,7 +13,7 @@ from tsdat.config.utils import recursive_instantiate
 
 def create_storage_class(instrument, data_folder):
     parameters = {
-        "bucket": "mcrl-data-test",
+        "bucket": "mcrl-data-processed",
         "region": "us-west-2",
         "storage_root": instrument,
         "data_folder": data_folder,
