@@ -10,16 +10,16 @@ attrs:
   naming_authority: gov.pnnl.sequim
   standard_name_vocabulary: CF Standard Name Table v79
   title: MCRLdata at PNNL-Sequim - CTD
-  # TODO: Change to "Summary" to meet standards
-  description: "A Seabird SBE 37-SM MicroCAT CTD (conductivity temperature depth) sensor 
-  was attached to a steel cage suspended into the water below a floating dock that is 
-  attached to the Marine and Coastal Research Laboratory (MCRL) pier at the Pacific 
-  Northwest National Laboratory (PNNL) campus in Sequim, Washington. This instrument measures 
-  conductivity which can be used to calculate salinity, temperature, and dissolved oxygen, which 
-  are important water quality measurements. This deployment is part of the MCRLdata project 
-  to establish long-term marine monitoring at the PNNL-Sequim Campus."
+  description: >-
+    A Seabird SBE 37-SM MicroCAT CTD (conductivity temperature depth) sensor was
+    attached to a steel cage suspended into the water below a floating dock that is
+    attached to the Marine and Coastal Research Laboratory (MCRL) pier at the Pacific
+    Northwest National Laboratory (PNNL) campus in Sequim, Washington. This instrument
+    measures conductivity which can be used to calculate salinity, temperature, and
+    dissolved oxygen, which are important water quality measurements. This deployment is
+    part of the MCRLdata project to establish long-term marine monitoring at the
+    PNNL-Sequim Campus.
   keywords: Sequim, data, marine, conductivity, salinity, temperature, dissolved oxygen
-  
   # Attribution
   creator_country: USA
   creator_email: mcrldata at pnnl.gov
@@ -33,23 +33,24 @@ attrs:
   publisher_email: mcrldata at pnnl.gov
   publisher_institution: Pacific Northwest National Laboratory (PNNL) - Sequim
   publisher_url: https://www.pnnl.gov/
-  
+
   # Platform and Instrument
   platform: dock
   platform_name: mcrl_dock
   platform_vocabulary: https://mmisw.org/ont/ioos/platform
-  instrument: In Situ/Laboratory Instruments > Conductivity Sensors > Conductivity Meters
+  instrument:
+    In Situ/Laboratory Instruments > Conductivity Sensors > Conductivity Meters
   instrument_vocabulary: GCMD Instrument Keywords #https://gcmd.earthdata.nasa.gov/KeywordViewer/
   make_model: Seabird SBE 37-SM MicroCAT
   calibration_date: "2019-07-02"
-  
+
   # Geospatial and Time
   geospatial_bounds: POINT(48.07927 -123.04506)
   geospatial_bounds_crs: "EPSG:4326"
   time_coverage_start: "2021-09-14"
   time_coverage_resolution: "5:00"
 
-  # TODO: Can we delete these? Part of storage location and file name right now...
+  # Don't delete these... they will be important for secondary pipelines
   location_id: ctd
   dataset_name: mcrl_pier
   qualifier: seabird_smp_1
@@ -80,7 +81,7 @@ data_vars:
       description: "Ambient water temperature in the vicinity of the device"
       fail_min: -20
       fail_max: 40
-      
+
   do:
     dims: [time]
     dtype: float
@@ -101,9 +102,10 @@ data_vars:
       standard_name: sea_water_practical_salinity
       units: psu
       coverage_content_type: physicalMeasurement
-      description: "Practical Salinity is a determination of the salinity of sea water, 
-      based on its electrical conductance. The measured conductance, corrected for temperature 
-      and pressure, is compared to the conductance of a standard potassium chloride solution, 
-      producing a value on the Practical Salinity Scale of 1978"
+      description: >-
+        Practical Salinity is a determination of the salinity of sea water, based on its
+        electrical conductance. The measured conductance, corrected for temperature and
+        pressure, is compared to the conductance of a standard potassium chloride
+        solution, producing a value on the Practical Salinity Scale of 1978.
       fail_min: 25
       fail_max: 35

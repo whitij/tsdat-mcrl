@@ -10,15 +10,15 @@ attrs:
   naming_authority: gov.pnnl.sequim
   standard_name_vocabulary: CF Standard Name Table v79
   title: MCRLdata at PNNL-Sequim - pH
-  # TODO: Change to "Summary" to meet standards
-  description: "An Onset mx2501 was attached to a steel cage suspended into the water below 
-  a floating dock that is attached to the Marine and Coastal Research Laboratory (MCRL) pier 
-  at the Pacific Northwest National Laboratory (PNNL) campus in Sequim, Washington. This 
-  instrument measures the potential of hydrogen (pH), which this parameter directly impacts 
-  organisms and habitats in the ocean. This deployment is part of the MCRLdata project to 
-  establish long-term marine monitoring at the PNNL-Sequim Campus."
+  description: >-
+    An Onset mx2501 was attached to a steel cage suspended into the water below a
+    floating dock that is attached to the Marine and Coastal Research Laboratory (MCRL)
+    pier at the Pacific Northwest National Laboratory (PNNL) campus in Sequim,
+    Washington. This instrument measures the potential of hydrogen (pH), which this
+    parameter directly impacts organisms and habitats in the ocean. This deployment is
+    part of the MCRLdata project to establish long-term marine monitoring at the
+    PNNL-Sequim Campus.
   keywords: Sequim, data, marine, pH, acidity
-  
   # Attribution
   creator_country: USA
   creator_email: mcrldata at pnnl.gov
@@ -32,16 +32,16 @@ attrs:
   publisher_email: mcrldata at pnnl.gov
   publisher_institution: Pacific Northwest National Laboratory (PNNL) - Sequim
   publisher_url: https://www.pnnl.gov/
-  
+
   # Platform and Instrument
   platform: dock
   platform_name: mcrl_dock
   platform_vocabulary: https://mmisw.org/ont/ioos/platform
   instrument: In Situ/Laboratory Instruments > Chemical Meters/Analyzers > pH Meters
   instrument_vocabulary: GCMD Instrument Keywords #https://gcmd.earthdata.nasa.gov/KeywordViewer/
-  make_model: Onset 
+  make_model: Onset
   calibration_date: "2021-09-12"
-  
+
   # Geospatial and Time
   geospatial_bounds: POINT(48.07927 -123.04506)
   geospatial_bounds_crs: "EPSG:4326"
@@ -49,7 +49,7 @@ attrs:
   time_coverage_end: "2021-09-12"
   time_coverage_resolution: "5:00"
 
-  # TODO: Can we delete these? Part of storage location and file name right now...
+  # Don't delete these... they will be important for secondary pipelines
   location_id: ph_ #TODO: currently requiring 3 characters
   dataset_name: mcrl_pier
   qualifier: onset_mx2501_1

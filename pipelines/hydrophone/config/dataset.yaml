@@ -10,15 +10,15 @@ attrs:
   naming_authority: gov.pnnl.sequim
   standard_name_vocabulary: CF Standard Name Table v79
   title: MCRLdata at PNNL-Sequim - Hydrophone
-  # TODO: Change to "Summary" to meet standards
-  description: "An Ocean Sonics icListen SC2-ETH-X2 hydrophone was installed on the Marine and 
-  Coastal Research Laboratory (MCRL) pier at the Pacific Northwest National Laboratory (PNNL) campus 
-  in Sequim, Washington. This instrument is located 2 ft above the seafloor with the sensor directed up, 
-  and measures average frequency spectra between 0 and 204 kHz, which can measures sources of sound such 
-  as passing boats, marine mammals, and flow noise. This deployment is part of the MCRLdata project to 
-  establish long-term marine monitoring at the PNNL-Sequim Campus."
+  description: >-
+    An Ocean Sonics icListen SC2-ETH-X2 hydrophone was installed on the Marine and
+    Coastal Research Laboratory (MCRL) pier at the Pacific Northwest National Laboratory
+    (PNNL) campus in Sequim, Washington. This instrument is located 2 ft above the
+    seafloor with the sensor directed up, and measures average frequency spectra between
+    0 and 204 kHz, which can measures sources of sound such as passing boats, marine
+    mammals, and flow noise. This deployment is part of the MCRLdata project to
+    establish long-term marine monitoring at the PNNL-Sequim Campus.
   keywords: Sequim, data, marine, underwater sound, hydrophone
-  
   # Attribution
   creator_country: USA
   creator_email: mcrldata at pnnl.gov
@@ -32,22 +32,24 @@ attrs:
   publisher_email: mcrldata at pnnl.gov
   publisher_institution: Pacific Northwest National Laboratory (PNNL) - Sequim
   publisher_url: https://www.pnnl.gov/
-  
+
   # Platform and Instrument
   platform: pier
   platform_name: mcrl_pier
   platform_vocabulary: https://mmisw.org/ont/ioos/platform
-  instrument: In Situ/Laboratory Instruments > Profilers/Sounders > Acoustic Sounders > Hydrophones
+  instrument:
+    In Situ/Laboratory Instruments > Profilers/Sounders > Acoustic Sounders >
+    Hydrophones
   instrument_vocabulary: GCMD Instrument Keywords #https://gcmd.earthdata.nasa.gov/KeywordViewer/
   make_model: Ocean Sonics icListen SC2-ETH-X2
-  
+
   # Geospatial and Time
   geospatial_bounds: POINT(48.07927 -123.04506)
   geospatial_bounds_crs: "EPSG:4326"
   time_coverage_start: "2021-09-14"
   time_coverage_resolution: "5:00"
 
-  # TODO: Can we delete these? Part of storage location and file name right now...
+  # Don't delete these... they will be important for secondary pipelines
   location_id: hydrophone
   dataset_name: mcrl_pier
   qualifier: oceansonics_iclisten_1
@@ -65,11 +67,11 @@ coords:
       cf_role: timeseries_id
       coverage_content_type: coordinate
       timezone: UTC
-      
+
   frequency:
     dims: [frequency]
     dtype: int
-    attrs: 
+    attrs:
       long_name: Frequency (Hz)
       standard_name: sound_frequency
       units: s-1
@@ -79,20 +81,21 @@ data_vars:
   spectra:
     dims: [time, frequency]
     dtype: float
-    attrs: 
+    attrs:
       long_name: Sound Frequency Spectra (dB)
       standard_name: sound_pressure_level_in_water
       units: dB re 1uPa
       coverage_content_type: physicalMeasurement
-      description: "Frequency spectra at bands between 10 Hz-204 kHz. One 5-minute averaged
-      reading every 15 minutes."
+      description: >-
+        Frequency spectra at bands between 10 Hz-204 kHz. One 5-minute averaged reading
+        every 15 minutes.
       fail_min: 50
       fail_max: 150
 
   SPL:
     dims: [time]
     dtype: float
-    attrs: 
+    attrs:
       long_name: Sound Pressure Level (dB)
       standard_name: sound_pressure_level_in_water
       units: dB re 1uPa
@@ -100,5 +103,5 @@ data_vars:
       description: "" #TODO
       fail_min: 50
       fail_max: 150
-      
+
   # TODO: Best practice to flag errors? Internal temp, relative humidity >50%

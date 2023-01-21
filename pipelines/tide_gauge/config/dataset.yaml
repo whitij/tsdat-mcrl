@@ -10,14 +10,14 @@ attrs:
   naming_authority: gov.pnnl.sequim
   standard_name_vocabulary: CF Standard Name Table v79
   title: MCRLdata at PNNL-Sequim - Tide Gauge
-  # TODO: Change to "Summary" to meet standards
-  description: "A Nile YSI Micropilot FMR51 was deployed on the Marine and Coastal Research Laboratory (MCRL) 
-  pier at the Pacific Northwest National Laboratory (PNNL) campus in Sequim, Washington. The instrument 
-  emits continuous, non-contact microwave transmission to measure distance to the water surface (meters), 
-  which allow measurement of tidal cycles. This deployment is part of the MCRLdata project to establish 
-  long-term marine monitoring at the PNNL-Sequim Campus."
+  description: >-
+    A Nile YSI Micropilot FMR51 was deployed on the Marine and Coastal Research
+    Laboratory (MCRL) pier at the Pacific Northwest National Laboratory (PNNL) campus in
+    Sequim, Washington. The instrument emits continuous, non-contact microwave
+    transmission to measure distance to the water surface (meters), which allow
+    measurement of tidal cycles. This deployment is part of the MCRLdata project to
+    establish long-term marine monitoring at the PNNL-Sequim Campus.
   keywords: Sequim, data, marine, water level, tide gauge
-  
   # Attribution
   creator_country: USA
   creator_email: mcrldata at pnnl.gov
@@ -31,7 +31,7 @@ attrs:
   publisher_email: mcrldata at pnnl.gov
   publisher_institution: Pacific Northwest National Laboratory (PNNL) - Sequim
   publisher_url: https://www.pnnl.gov/
-  
+
   # Platform and Instrument
   platform: pier
   platform_name: mcrl_pier
@@ -40,7 +40,7 @@ attrs:
   instrument_vocabulary: GCMD Instrument Keywords #https://gcmd.earthdata.nasa.gov/KeywordViewer/
   make_model: FMR-51 YSI-Nile
   calibration_date: "2021-03-04"
-  
+
   # Geospatial and Time
   geospatial_bounds: POINT(48.07928 -123.04512)
   geospatial_bounds_crs: "EPSG:4326"
@@ -48,8 +48,8 @@ attrs:
   geospatial_vertical_positive: up
   time_coverage_start: "2021-03-04"
   time_coverage_resolution: "5:00"
-  
-  # TODO: Can we delete these? Part of storage location and file name right now...
+
+  # Don't delete these... they will be important for secondary pipelines
   location_id: tide_gauge
   dataset_name: mcrl_pier
   qualifier: ysi_nile_1
@@ -77,7 +77,7 @@ data_vars:
       standard_name: sea_surface_height_above_geopotential_datum
       units: m
       coverage_content_type: physicalMeasurement
-      description: "water surface level relative to NAVD88"
+      description: Water surface level relative to NAVD88
       vertical_datum: NAVD88
       fail_min: -2
       fail_max: 5

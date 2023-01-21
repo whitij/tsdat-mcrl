@@ -10,18 +10,17 @@ attrs:
   naming_authority: gov.pnnl.sequim
   standard_name_vocabulary: CF Standard Name Table v79
   title: MCRLdata at PNNL-Sequim - ADCP
-  # TODO: Change to "Summary" to meet standards
-  description: "A Nortek 400kHz 2D Horizontal Profiler was installed on the Marine and Coastal 
-  Research Laboratory (MCRL) pier at the Pacific Northwest National Laboratory (PNNL) campus 
-  in Sequim, Washington. This instrument is located 5 meters above the seabed, facing true 
-  East and has an actual range of 98 meters because of the bathymetry, measuring each second 
-  for a 5-minute interval every 15 minutes with a bin size of 4 meters. This Acoustic Doppler 
-  Current Profiler (ADCP) measures horizontal flow velocity, which helps to characterize the 
-  tidal cycle and flow exchange, which impacts nutrient and pollutant flushing rates. This 
-  deployment is part of the MCRLdata project to establish long-term marine monitoring at the 
-  PNNL-Sequim Campus."
+  description: >-
+    A Nortek 400kHz 2D Horizontal Profiler was installed on the Marine and Coastal
+    Research Laboratory (MCRL) pier at the Pacific Northwest National Laboratory (PNNL)
+    campus in Sequim, Washington. This instrument is located 5 meters above the seabed,
+    facing true East and has an actual range of 98 meters because of the bathymetry,
+    measuring each second for a 5-minute interval every 15 minutes with a bin size of 4
+    meters. This Acoustic Doppler Current Profiler (ADCP) measures horizontal flow
+    velocity, which helps to characterize the tidal cycle and flow exchange, which
+    impacts nutrient and pollutant flushing rates. This deployment is part of the
+    MCRLdata project to establish long-term marine monitoring at the PNNL-Sequim Campus.
   keywords: Sequim, data, marine, channel, water velocity, water direction, flows
-  
   # Attribution
   creator_country: USA
   creator_email: mcrldata at pnnl.gov
@@ -35,7 +34,7 @@ attrs:
   publisher_email: mcrldata at pnnl.gov
   publisher_institution: Pacific Northwest National Laboratory (PNNL) - Sequim
   publisher_url: https://www.pnnl.gov/
-  
+
   # Platform and Instrument
   platform: pier
   platform_name: mcrl_pier
@@ -43,21 +42,19 @@ attrs:
   instrument: In Situ/Laboratory Instruments > Current/Wind Meters > Current Meters
   instrument_vocabulary: GCMD Instrument Keywords #https://gcmd.earthdata.nasa.gov/KeywordViewer/
   make_model: Nortek 400kHz 2D Horizontal Profiler
-  
+
   # Geospatial and Time
   geospatial_bounds: POINT(48.07924 -123.04506)
   geospatial_bounds_crs: "EPSG:4326"
   time_coverage_start: "2021-09-08"
   time_coverage_resolution: "15:00"
 
-  # TODO: Can we delete these? Part of storage location and file name right now...
+  # Don't delete these... they will be important for secondary pipelines
   location_id: adcp
   dataset_name: mcrl_pier
   data_level: a1
   qualifier: nortek_awac_1
-  temporal: 5min
-  
-  #TODO: Do we want sampling_interval?
+  temporal: 15min
 
 coords:
   time:
@@ -98,9 +95,9 @@ data_vars:
     dims: [dir, range, time]
     dtype: float32
     attrs:
-      long_name: Velocity
-      standard_name: water_velocity
-      units: m/s
+      long_name: Water Velocity
+      standard_name: velocity_from_multibeam_acoustic_doppler_velocity_profiler_in_sea_water
+      units: m s-1
       coverage_content_type: physicalMeasurement
       fail_min: -5
       fail_max: 5
@@ -108,8 +105,8 @@ data_vars:
     dims: [range, time]
     dtype: float32
     attrs:
-      long_name: Flow Speed
-      standard_name: sea_water_velocity_magnitude
+      long_name: Water Speed
+      standard_name: sea_water_speed
       units: m s-1
       coverage_content_type: physicalMeasurement
       fail_min: 0
@@ -118,8 +115,8 @@ data_vars:
     dims: [range, time]
     dtype: float32
     attrs:
-      long_name: Flow Direction
-      standard_name: sea_water_velocity_to_direction
+      long_name: Water Direction
+      standard_name: sea_water_to_direction
       units: degree
       coverage_content_type: physicalMeasurement
       fail_min: -180
@@ -128,8 +125,8 @@ data_vars:
     dims: [beam, range, time]
     dtype: int
     attrs:
-      long_name: Amplitude
-      standard_name: amplitude
+      long_name: Acoustic Signal Amplitude
+      standard_name: signal_intensity_from_multibeam_acoustic_doppler_velocity_profiler_in_sea_water
       units: count
       coverage_content_type: physicalMeasurement
   temperature:
@@ -159,7 +156,7 @@ data_vars:
     dtype: float32
     attrs:
       long_name: Heading of ADCP Measurement (deg)
-      standard_name: platform_course
+      standard_name: platform_orientation
       units: degree
       coverage_content_type: physicalMeasurement
       fail_min: 0
@@ -184,7 +181,7 @@ data_vars:
       coverage_content_type: physicalMeasurement
       fail_min: 0
       fail_max: 360
-  c_sound: #TODO: Remove?
+  c_sound:
     dims: [time]
     dtype: float32
     attrs:
