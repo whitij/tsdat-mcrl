@@ -52,9 +52,8 @@ def write_raw(input_key, config, instrument):
         )
     )
     filepath = datastream_dir / filename
-    filepath.parent.mkdir(exist_ok=True, parents=True)
-    shutil.move(input_key, filepath)  # save file by moving it from source
-    # Using 'copy' on tsdat-mcrl-local, 'move' on tsdat-mcrl
+    # Save file by moving it from source. Don't need to make directory with S3
+    shutil.move(input_key, filepath)
 
 
 def write_parquet(dataset, instrument):

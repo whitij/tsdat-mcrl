@@ -100,7 +100,7 @@ data_vars:
     attrs:
       long_name: Velocity
       standard_name: water_velocity
-      units: m/s
+      units: m s-1
       coverage_content_type: physicalMeasurement
       fail_min: -5
       fail_max: 5
