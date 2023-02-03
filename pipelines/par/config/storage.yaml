@@ -1,6 +1,6 @@
 classname: tsdat.io.storage.FileSystemS3
 parameters:
-  bucket: mcrl-data-test
+  bucket: mcrl-data-processed
   region: us-west-2
   storage_root: par
   data_folder: netcdf

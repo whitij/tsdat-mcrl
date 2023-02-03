@@ -13,14 +13,16 @@ from tsdat.config.utils import recursive_instantiate
 
 def create_storage_class(instrument, data_folder):
     parameters = {
-        "storage_root": Path.cwd() / "storage" / instrument,
+        "bucket": "mcrl-data-processed",
+        "region": "us-west-2",
+        "storage_root": instrument,
         "data_folder": data_folder,
         "data_storage_path": Path(
             "{storage_root}/{datastream}/{data_folder}/year={year}/month={month}/day={day}"
         ),
     }
     storage_model = StorageConfig(
-        classname="tsdat.io.storage.FileSystem", parameters=parameters
+        classname="tsdat.io.storage.FileSystemS3", parameters=parameters
     )
     return storage_model
 
@@ -50,9 +52,8 @@ def write_raw(input_key, config, instrument):
         )
     )
     filepath = datastream_dir / filename
-    filepath.parent.mkdir(exist_ok=True, parents=True)
-    shutil.move(input_key, filepath)  # save file by moving it from source
-    # Using 'copy' on tsdat-mcrl-local, 'move' on tsdat-mcrl
+    # Save file by moving it from source. Don't need to make directory with S3
+    shutil.move(input_key, filepath)
 
 
 def write_parquet(dataset, instrument):
