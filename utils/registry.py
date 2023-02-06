@@ -96,6 +96,8 @@ class PipelineRegistry:
             skipped,
         )
 
+        return successes, failures, skipped
+
     def _load(self, folder: Path = Path("pipelines")):
         """-----------------------------------------------------------------------------
         Discovers all pipelines under the parent module and registers them for later
