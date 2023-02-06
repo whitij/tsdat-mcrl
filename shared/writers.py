@@ -1,4 +1,5 @@
-import shutil
+import logging
+import tempfile
 import pandas as pd
 import xarray as xr
 from pathlib import Path
@@ -9,6 +10,8 @@ from tstring import Template
 from tsdat import FileWriter
 from tsdat.config.storage import StorageConfig
 from tsdat.config.utils import recursive_instantiate
+
+logger = logging.getLogger(__name__)
 
 
 def create_storage_class(instrument, data_folder):
@@ -28,12 +31,23 @@ def create_storage_class(instrument, data_folder):
 
 
 def write_raw(input_key, config, instrument):
+    """----------------------------------------------------------------------------
+    Manually copy/move the raw datafile from the input storage bucket to the output
+    storage bucket.
+
+    Args:
+        input_key (str): Raw datafile's filpath
+        config (dict): Pipeline configuration dictionary from input yaml files
+        instrument (str): Name of instrument pipeline
+
+    ----------------------------------------------------------------------------"""
     storage_model = create_storage_class(instrument, "raw")
     storage = recursive_instantiate(storage_model)
 
     # Can get datastream from pipeline config
     # Can get year/month/day from input filename b/c log files are always listed in UTC
     filename = input_key.replace("\\", "/").split("/")[-1]
+    datastream = config.dataset.attrs.datastream
     date = filename.split("_")[-2]
     year = date[:4]
     month = date[4:6]
@@ -44,16 +58,23 @@ def write_raw(input_key, config, instrument):
     datastream_dir = Path(
         data_stub_path.substitute(
             dict(
-                datastream=config.dataset.attrs.datastream,
+                datastream=datastream,
                 year=year,
                 month=month,
                 day=day,
             ),
         )
     )
-    filepath = datastream_dir / filename
-    # Save file by moving it from source. Don't need to make directory with S3
-    shutil.move(input_key, filepath)
+    standard_fpath = datastream_dir / filename
+
+    # Copy S3 save_data without using a writer
+    storage._bucket.upload_file(Filename=input_key, Key=standard_fpath.as_posix())
+    logger.info(
+        "Saved %s data file to s3://%s/%s",
+        datastream,
+        storage.parameters.bucket,
+        standard_fpath,
+    )
 
 
 def write_parquet(dataset, instrument):
