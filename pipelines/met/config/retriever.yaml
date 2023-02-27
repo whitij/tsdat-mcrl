@@ -33,11 +33,8 @@ data_vars:
   baro_temp:
     name: BP_Temp_Avg
   baro_qual_metric:
-    input:
-      name: BP_Qual_Min
+    name: BP_Qual_Min
   lower_par:
-    input:
-      name: PAR_lower_Avg
+    name: PAR_lower_Avg
   upper_par:
-    input:
-      name: PAR_upper_Avg
+    name: PAR_upper_Avg
