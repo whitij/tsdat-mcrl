@@ -1,7 +1,7 @@
 classname: pipelines.ctd.pipeline.CTD
 
 triggers:
-  - .*ctd.*.log
+  - .*ctd.*\.log
 
 retriever:
   path: pipelines/ctd/config/retriever.yaml

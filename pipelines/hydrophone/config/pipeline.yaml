@@ -1,7 +1,7 @@
 classname: pipelines.hydrophone.pipeline.Hydrophone
 
 triggers:
-  - .*\\SCF.*.txt
+  - .*SCF.*\.txt
 
 retriever:
   path: pipelines/hydrophone/config/retriever.yaml

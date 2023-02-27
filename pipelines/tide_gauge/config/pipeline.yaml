@@ -1,7 +1,7 @@
 classname: pipelines.tide_gauge.pipeline.Tide_Gauge
 
 triggers:
-  - .*tidegage.*.log
+  - .*tidegage.*\.log
 
 retriever:
   path: pipelines/tide_gauge/config/retriever.yaml

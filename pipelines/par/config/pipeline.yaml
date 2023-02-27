@@ -1,7 +1,7 @@
 classname: pipelines.par.pipeline.PAR
 
 triggers:
-  - .*par.*.log
+  - .*par.*\.log
 
 retriever:
   path: pipelines/par/config/retriever.yaml

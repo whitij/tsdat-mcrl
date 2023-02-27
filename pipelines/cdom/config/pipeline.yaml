@@ -1,7 +1,7 @@
 classname: pipelines.cdom.pipeline.CDOM
 
 triggers:
-  - .*cdom.*.log
+  - .*cdom.*\.log
 
 retriever:
   path: pipelines/cdom/config/retriever.yaml

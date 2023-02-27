@@ -1,7 +1,7 @@
 classname: pipelines.ph.pipeline.PH
 
 triggers:
-  - .*\\ph.*.txt
+  - .*ph.*\.txt
 
 retriever:
   path: pipelines/ph/config/retriever.yaml
