@@ -11,5 +11,8 @@ dataset:
 
 quality:
   path: shared/quality.yaml
+
 storage:
-  path: pipelines/adcp/config/storage.yaml
+  path: shared/storage.yaml
+  overrides:
+    /parameters/storage_root: adcp
