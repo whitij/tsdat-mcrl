@@ -29,7 +29,25 @@ class CTDReader(DataReader):
     to not use any configuration parameters then please remove the code above."""
 
     def read(self, input_key: str) -> Union[xr.Dataset, Dict[str, xr.Dataset]]:
-      df = pd.read_csv(input_key, sep=',| ', header=None, engine='python', names=('date','time','ms','tlabel','temp','slabel','salinity','dolabel','do','clabel','conductivity'))
-      df['time'] = df['date'] + ' ' + df['time'] + '.' + [str(x) for x in df['ms']]
-      df = df.drop(columns = ['tlabel','slabel','dolabel','clabel','date','ms'])
-      return df.to_xarray()
+        df = pd.read_csv(
+            input_key,
+            sep=",| ",
+            header=None,
+            engine="python",
+            names=(
+                "date",
+                "time",
+                "ms",
+                "tlabel",
+                "temp",
+                "dolabel",
+                "do",
+                "slabel",
+                "salinity",
+                "clabel",
+                "conductivity",
+            ),
+        )
+        df["time"] = df["date"] + " " + df["time"] + "." + [str(x) for x in df["ms"]]
+        df = df.drop(columns=["tlabel", "slabel", "dolabel", "clabel", "date", "ms"])
+        return df.to_xarray()
