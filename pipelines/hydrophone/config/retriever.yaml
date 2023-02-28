@@ -16,5 +16,3 @@ coords:
 data_vars:
   spectra:
     name: spectra
-  SPL:
-    name: SPL
