@@ -21,7 +21,7 @@ def create_storage_class(instrument, data_folder):
         "storage_root": instrument,
         "data_folder": data_folder,
         "data_storage_path": Path(
-            "{storage_root}/{datastream}/{data_folder}/year={year}/month={month}/day={day}"
+            "{storage_root}/{datastream}/{data_folder}/{year}/{month}/{day}"
         ),
     }
     storage_model = StorageConfig(
