@@ -5,14 +5,12 @@ readers:
 
 coords:
   time:
-    .*:
-      name: time
-      data_converters:
-        - classname: tsdat.io.converters.StringToDatetime
-          format: "%Y-%m-%d %H:%M:%S"
-          timezone: UTC
+    name: time
+    data_converters:
+      - classname: tsdat.io.converters.StringToDatetime
+        format: "%Y-%m-%d %H:%M:%S"
+        timezone: UTC
 
 data_vars:
   water_level:
-    .*:
-      name: water_level
+    name: water_level

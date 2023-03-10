@@ -31,17 +31,9 @@ class TideGaugeReader(DataReader):
     to not use any configuration parameters then please remove the code above."""
 
     def read(self, input_key: str) -> Union[xr.Dataset, Dict[str, xr.Dataset]]:
-        df = pd.read_csv(
-            input_key,
-            sep=",| ",
-            header=None,
-            engine="python",
-            names=("date", "time", "ms", "flag", "water_level"),
-        )
+        df = pd.read_csv(input_key,sep=",| ",header=None,engine="python",names=("date", "time", "ms", "flag", "water_level"),)
         df["time"] = df["date"] + " " + df["time"] + "." + [str(x) for x in df["ms"]]
         # The flag was removed in later versions, so copy if needed
-        df["water_level"] = np.where(
-            df["water_level"].isnull(), df["flag"], df["water_level"]
-        )
+        df["water_level"] = np.where(df["water_level"].isnull(), df["flag"], df["water_level"])
         df = df.drop(columns=["date", "ms", "flag"])
         return df.to_xarray()
