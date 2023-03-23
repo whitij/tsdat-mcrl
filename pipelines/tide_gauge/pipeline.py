@@ -21,6 +21,7 @@ class Tide_Gauge(IngestPipeline):
         dataset["water_level"].data = 3.713 - 0.0561266 - dataset["water_level"].data
 
         # This used to be in local time, changed to UTC on 2023-1-5 3:30pm (local time)
+        # Log files were always named in UTC, but the data was saved in Pacific
         if dataset.time[-1] < np.datetime64("2023-01-05T15:31:00"):
             dt = pd.to_datetime(dataset.time.data, format="%Y-%m-%d %H:%M:%S.%f")
             dt = dt.tz_localize("US/Pacific").tz_convert("UTC")  # type: ignore
