@@ -19,7 +19,7 @@ class MET(IngestPipeline):
         if dataset.time[-1] < np.datetime64("2023-01-05T16:11:00"):
             # Always add 7 hours instead of using timezone conversion because it was stuck in PDT
             newTime = dataset.time + np.timedelta64(7, "h")
-            dataset.assign_coords(time=newTime)
+            dataset = dataset.assign_coords(time=newTime)
 
         return dataset
 

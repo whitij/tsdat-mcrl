@@ -23,7 +23,7 @@ class CTD(IngestPipeline):
             # Numpy can't handle localized datetime arrays so we force the datetime to
             # be naive (i.e. timezone 'unaware').
             dt = dt.tz_localize(None)  # type: ignore
-            dataset.assign_coords(time=dt)
+            dataset = dataset.assign_coords(time=dt)
 
         # Note: the CTD calculates salinity onboard, so we don't need this conversion anymore
         return dataset
