@@ -89,8 +89,8 @@ data_vars:
       description: >-
         Frequency spectra at bands between 10 Hz-204 kHz. One 5-minute averaged reading
         every 15 minutes.
-      fail_min: 50
-      fail_max: 150
+      valid_min: 50
+      valid_max: 150
 
   SPL:
     dims: [time]
@@ -101,7 +101,7 @@ data_vars:
       units: dB re 1uPa
       coverage_content_type: physicalMeasurement
       description: "" #TODO
-      fail_min: 50
-      fail_max: 150
+      valid_min: 50
+      valid_max: 150
 
   # TODO: Best practice to flag errors? Internal temp, relative humidity >50%

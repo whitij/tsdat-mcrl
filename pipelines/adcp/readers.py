@@ -50,12 +50,10 @@ class ADCPDataReader(DataReader):
         # Set speed and direction
         dat["U_mag"] = dat.velds.U_mag
         dat["U_dir"] = dat.velds.U_dir
-        dat["U_dir"].values = dolfyn.tools.misc.convert_degrees(dat["U_dir"].values)
-        dat["U_dir"].attrs["description"] = "Degrees CW from North"
 
-        # Dropping the detailed configuration stats because netcdf can't save it
-        for key in list(dat.attrs.keys()):
-            if "config" in key:
-                dat.attrs.pop(key)
+        # Convert from [0, 360] back to [-180, 180]
+        u_dir = dat["U_dir"].values
+        u_dir[u_dir > 180] -= 360
+        dat["U_dir"].values = u_dir
 
         return dat

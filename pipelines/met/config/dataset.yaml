@@ -77,8 +77,8 @@ data_vars:
       units: m s-1
       coverage_content_type: physicalMeasurement
       description: "Average wind speed in the sampling window in m/s"
-      fail_min: 0
-      fail_max: 20
+      valid_min: 0
+      valid_max: 20
       calibration_date: "2021-10-15"
 
   windspeed_max:
@@ -90,8 +90,8 @@ data_vars:
       units: m s-1
       coverage_content_type: physicalMeasurement
       description: "Maximum wind speed in measurement window (gusts)"
-      fail_min: 0
-      fail_max: 30
+      valid_min: 0
+      valid_max: 30
       calibration_date: "2021-10-15"
 
   winddir:
@@ -107,8 +107,8 @@ data_vars:
         and 360 degrees, in which 0 degrees is returned. Also, some measurement
         sequences can return negative values. If Wind direction is < 0, wind direction =
         0"
-      fail_min: 0
-      fail_max: 360
+      valid_min: 0
+      valid_max: 360
       calibration_date: "2021-10-15"
 
   airtemp_avg:
@@ -122,8 +122,8 @@ data_vars:
       description:
         "Average ambient air temperature measured by the HygroVUE10. 0.1 degC accuracy
         20-60 deg C. 0.2 deg C outside of that range. 0.001 deg C resolution"
-      fail_min: -20
-      fail_max: 40
+      valid_min: -20
+      valid_max: 40
       calibration_date: "2021-10-15"
 
   rh:
@@ -137,8 +137,8 @@ data_vars:
       description:
         "Relative humidity measured by the HygroVUE10. 1.5% accuracy to 80% RH, 2% above
         80% RH. 0.001% resolution."
-      fail_min: 0
-      fail_max: 100
+      valid_min: 0
+      valid_max: 100
       calibration_date: "2021-10-15"
 
   rain:
@@ -151,8 +151,8 @@ data_vars:
       description:
         "Total rainfall in mm measured by the TE525-series tipping bucket rain gage.
         0-50 degC operating range. 1% accuracy up to 2 in/hr"
-      fail_min: 0
-      fail_max: 10
+      valid_min: 0
+      valid_max: 10
       calibration_date: "2021-10-15"
 
   par_avg:
@@ -164,8 +164,8 @@ data_vars:
       units: umol m-2 s-1
       coverage_content_type: physicalMeasurement
       description: "PAR flux density measured by the Li-COR 190 quantum sensor in air"
-      fail_min: 0
-      fail_max: 1000
+      valid_min: 0
+      valid_max: 1000
       calibration_date: "2021-10-15"
 
   par_tot:
@@ -177,8 +177,8 @@ data_vars:
       units: umol m-2
       coverage_content_type: physicalMeasurement
       description: "PAR total flux measured by the Li-COR 190 quantum sensor in air"
-      fail_min: 0
-      fail_max: 500
+      valid_min: 0
+      valid_max: 500
       calibration_date: "2021-10-15"
 
   baro_pressure:
@@ -192,8 +192,8 @@ data_vars:
       description:
         "Barometric pressure measured by the BaroVUEW 10 digital barometer, 0.3 hPa
         uncertainty at 20 degrees C"
-      fail_min: 800
-      fail_max: 1100
+      valid_min: 800
+      valid_max: 1100
       calibration_date: "2021-10-15"
 
   baro_temp:
@@ -205,8 +205,8 @@ data_vars:
       units: degree_C
       coverage_content_type: physicalMeasurement
       description: "Temperature measured by the BaroVUE 10 digital barometer"
-      fail_min: -20
-      fail_max: 40
+      valid_min: -20
+      valid_max: 40
 
   baro_qual_metric:
     dims: [time]
@@ -219,8 +219,8 @@ data_vars:
       description:
         "Quality metric for BaroVUE barometer. >6, freshly calibrated. 5-5.99, sensor
         working well. 4-4.99, needs cal in 2-3 months. 0-3.99, needs calibration now."
-      fail_min: 0
-      fail_max: 6
+      valid_min: 0
+      valid_max: 6
 
   lower_par:
     dims: [time]
@@ -233,8 +233,8 @@ data_vars:
       description:
         "PAR flux density measured by the Li-COR 193 quantum sensor, lower sensor under
         sea water"
-      fail_min: 0
-      fail_max: 500
+      valid_min: 0
+      valid_max: 500
       calibration_date: "2021-02-04"
 
   upper_par:
@@ -248,6 +248,6 @@ data_vars:
       description:
         "PAR flux density measured by the Li-COR 193 quantum sensor, upper sensor under
         sea water"
-      fail_min: 0
-      fail_max: 500
+      valid_min: 0
+      valid_max: 500
       calibration_date: "2021-01-14"

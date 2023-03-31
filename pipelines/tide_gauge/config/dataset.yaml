@@ -79,5 +79,5 @@ data_vars:
       coverage_content_type: physicalMeasurement
       description: Water surface level relative to NAVD88
       vertical_datum: NAVD88
-      fail_min: -2
-      fail_max: 5
+      valid_min: -2
+      valid_max: 5

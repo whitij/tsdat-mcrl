@@ -99,8 +99,8 @@ data_vars:
       standard_name: velocity_from_multibeam_acoustic_doppler_velocity_profiler_in_sea_water
       units: m s-1
       coverage_content_type: physicalMeasurement
-      fail_min: -5
-      fail_max: 5
+      valid_min: -5
+      valid_max: 5
   U_mag:
     dims: [range, time]
     dtype: float32
@@ -109,8 +109,8 @@ data_vars:
       standard_name: sea_water_speed
       units: m s-1
       coverage_content_type: physicalMeasurement
-      fail_min: 0
-      fail_max: 5
+      valid_min: 0
+      valid_max: 5
   U_dir:
     dims: [range, time]
     dtype: float32
@@ -119,8 +119,8 @@ data_vars:
       standard_name: sea_water_to_direction
       units: degree
       coverage_content_type: physicalMeasurement
-      fail_min: -180
-      fail_max: 180
+      valid_min: -180
+      valid_max: 180
   amplitude:
     dims: [beam, range, time]
     dtype: int
@@ -137,8 +137,8 @@ data_vars:
       standard_name: sea_water_temperature
       units: degree_C
       coverage_content_type: physicalMeasurement
-      fail_min: 0
-      fail_max: 30
+      valid_min: 0
+      valid_max: 30
   depth:
     dims: [time]
     dtype: float32
@@ -149,8 +149,8 @@ data_vars:
       coverage_content_type: coordinate
       axis: Z
       positive: down
-      fail_min: 0
-      fail_max: 1000
+      valid_min: 0
+      valid_max: 1000
   heading:
     dims: [time]
     dtype: float32
@@ -159,8 +159,8 @@ data_vars:
       standard_name: platform_orientation
       units: degree
       coverage_content_type: physicalMeasurement
-      fail_min: 0
-      fail_max: 360
+      valid_min: 0
+      valid_max: 360
   pitch:
     dims: [time]
     dtype: float32
@@ -169,8 +169,8 @@ data_vars:
       standard_name: platform_pitch
       units: degree
       coverage_content_type: physicalMeasurement
-      fail_min: 0
-      fail_max: 360
+      valid_min: 0
+      valid_max: 360
   roll:
     dims: [time]
     dtype: float32
@@ -179,8 +179,8 @@ data_vars:
       standard_name: platform_roll
       units: degree
       coverage_content_type: physicalMeasurement
-      fail_min: 0
-      fail_max: 360
+      valid_min: 0
+      valid_max: 360
   c_sound:
     dims: [time]
     dtype: float32
@@ -196,5 +196,5 @@ data_vars:
       standard_name: sea_water_pressure
       units: dbar
       coverage_content_type: physicalMeasurement
-      fail_min: 0
-      fail_max: 1000
+      valid_min: 0
+      valid_max: 1000

@@ -78,8 +78,8 @@ data_vars:
       units: degree_C
       coverage_content_type: physicalMeasurement
       description: "Ambient water temperature in the vicinity of the device"
-      fail_min: 0
-      fail_max: 30
+      valid_min: 0
+      valid_max: 30
 
   pH:
     dims: [time]
@@ -90,5 +90,5 @@ data_vars:
       units: unitless
       coverage_content_type: physicalMeasurement
       description: "Measure of acidity of seawater"
-      fail_min: 0
-      fail_max: 14
+      valid_min: 0
+      valid_max: 14

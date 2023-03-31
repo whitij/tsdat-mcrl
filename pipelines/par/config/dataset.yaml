@@ -77,8 +77,8 @@ data_vars:
       description:
         "PAR flux density measured by the Li-COR 193 quantum sensor, lower sensor under
         sea water"
-      fail_min: 0
-      fail_max: 500
+      valid_min: 0
+      valid_max: 500
       calibration_date: "2021-02-04"
 
   upper_par:
@@ -92,6 +92,6 @@ data_vars:
       description:
         "PAR flux density measured by the Li-COR 193 quantum sensor, upper sensor under
         sea water"
-      fail_min: 0
-      fail_max: 500
+      valid_min: 0
+      valid_max: 500
       calibration_date: "2021-01-14"
