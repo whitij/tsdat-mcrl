@@ -53,7 +53,7 @@ attrs:
   # Don't delete these... they will be important for secondary pipelines
   location_id: ctd
   dataset_name: mcrl_pier
-  qualifier: seabird_triplet_1
+  qualifier: seabird_smp_1
   temporal: 5min
   data_level: a1
 
