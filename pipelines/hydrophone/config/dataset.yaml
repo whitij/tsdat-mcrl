@@ -100,8 +100,43 @@ data_vars:
       standard_name: sound_pressure_level_in_water
       units: dB re 1uPa
       coverage_content_type: physicalMeasurement
-      description: "" #TODO
+      description: >-
+        "Sound pressure is the difference from the local ambient pressure caused by a
+        sound wave at a particular location and time. Sound pressure level in water is
+        expressed on a logarithmic scale with reference to a sound pressure of 1e-6 Pa.
+        Lp = 20 log10(p/p0) where Lp is the sound pressure level, p is the rms sound
+        pressure and p0 is the reference sound pressure."
       valid_min: 50
       valid_max: 150
 
-  # TODO: Best practice to flag errors? Internal temp, relative humidity >50%
+  # Temperature and humidity are internal measurements, for monitoring device health
+  # QA/QC checks should occur on the second order pipeline with NetCDF files
+  temperature:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Internal Temperature (degC)
+      standard_name: temperature_of_sensor_in_sea_water
+      units: degree_C
+      coverage_content_type: physicalMeasurement
+      description: >-
+        "Temperature_of_sensor_in_sea_water is the internal instrument temperature used
+        in determining device health; it is not a measurement of the ambient water
+        temperature."
+      valid_min: -20
+      valid_max: 40
+
+  humidity:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Internal Relative Humidity (%)
+      standard_name: relative_humidity_of_sensor_in_sea_water
+      units: percent
+      coverage_content_type: physicalMeasurement
+      description: >-
+        "Relative_humidity_of_sensor_in_sea_water is the internal instrument relative
+        humidity  used in determining device health; it is not a measurement of the
+        ambient water relative  humidity."
+      valid_min: 0
+      valid_max: 50
