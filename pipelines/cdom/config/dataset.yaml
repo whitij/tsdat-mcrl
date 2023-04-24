@@ -84,7 +84,6 @@ data_vars:
         nutrients and metals that contaminate the water.
       valid_min: 0
       valid_max: 150
-      calibration_date: "2018-09-19"
 
   phycoerythrin:
     dims: [time]
@@ -100,7 +99,6 @@ data_vars:
         main chlorophyll pigments responsible for photosynthesis.
       valid_min: 0
       valid_max: 100
-      calibration_date: "2018-09-19"
 
   chlorophyll:
     dims: [time]
@@ -115,4 +113,3 @@ data_vars:
         cyanobacteria; their presence is essential for photosynthesis to take place.
       valid_min: 0
       valid_max: 100
-      calibration_date: "2018-09-19"
