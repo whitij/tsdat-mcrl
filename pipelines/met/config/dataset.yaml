@@ -79,7 +79,7 @@ data_vars:
       description: "Average wind speed in the sampling window in m/s"
       valid_min: 0
       valid_max: 20
-      calibration_date: "2021-10-15"
+      calibration_date: "2021-06-22"
 
   windspeed_max:
     dims: [time]
@@ -92,7 +92,7 @@ data_vars:
       description: "Maximum wind speed in measurement window (gusts)"
       valid_min: 0
       valid_max: 30
-      calibration_date: "2021-10-15"
+      calibration_date: "2021-06-22"
 
   winddir:
     dims: [time]
@@ -109,7 +109,7 @@ data_vars:
         0"
       valid_min: 0
       valid_max: 360
-      calibration_date: "2021-10-15"
+      calibration_date: "2021-06-22"
 
   airtemp_avg:
     dims: [time]
@@ -124,7 +124,7 @@ data_vars:
         20-60 deg C. 0.2 deg C outside of that range. 0.001 deg C resolution"
       valid_min: -20
       valid_max: 40
-      calibration_date: "2021-10-15"
+      calibration_date: "2021-07-26"
 
   rh:
     dims: [time]
@@ -139,18 +139,19 @@ data_vars:
         80% RH. 0.001% resolution."
       valid_min: 0
       valid_max: 100
-      calibration_date: "2021-10-15"
+      calibration_date: "2021-07-26"
 
   rain:
     dims: [time]
     dtype: float
     attrs:
-      long_name: Total Rainfall (mm)
+      long_name: Total Rainfall (in)
       standard_name: thickness_of_rainfall_amount
-      units: mm
+      units: in
       description:
-        "Total rainfall in mm measured by the TE525-series tipping bucket rain gage.
-        0-50 degC operating range. 1% accuracy up to 2 in/hr"
+        "Total rainfall in inches measured by the TE525 tipping bucket rain gage with a
+        6-inch diameter orifice. 0-50 degC operating range. 0.01 inch resolution, 1%
+        accuracy up to 2 in/hr."
       valid_min: 0
       valid_max: 10
       calibration_date: "2021-10-15"
@@ -163,23 +164,36 @@ data_vars:
       standard_name: surface_downwelling_photosynthetic_photon_flux_in_air
       units: umol m-2 s-1
       coverage_content_type: physicalMeasurement
-      description: "PAR flux density measured by the Li-COR 190 quantum sensor in air"
+      description:
+        "PAR flux density measured by the Li-COR 190 quantum sensor in air. Surface
+        means the lower boundary of the atmosphere. Downwelling radiation is radiation
+        from above, it does not mean net downward. Photosynthetic radiation is the part
+        of the spectrum which is used in photosynthesis e.g. 400-700 nm. A photon flux
+        is specified in terms of numbers of photons expressed in moles, per unit area."
       valid_min: 0
       valid_max: 1000
-      calibration_date: "2021-10-15"
+      calibration_date: "2021-03-19"
+      manufacture_date: "2021-03-17"
 
   par_tot:
     dims: [time]
     dtype: float
     attrs:
       long_name: Total Photosynthetically Active Radiation (umol m-2)
-      standard_name: surface_downwelling_photosynthetic_photon_flux_in_air
+      standard_name: surface_downwelling_photosynthetic_photon_flux_density_in_air
       units: umol m-2
       coverage_content_type: physicalMeasurement
-      description: "PAR total flux measured by the Li-COR 190 quantum sensor in air"
+      description:
+        "PAR total flux measured by the Li-COR 190 quantum sensor in air during the
+        5-minute time window. Surface means the lower boundary of the atmosphere.
+        Downwelling radiation is radiation from above, it does not mean net downward.
+        Photosynthetic radiation is the part of the spectrum which is used in
+        photosynthesis e.g. 400-700 nm. A photon flux is specified in terms of numbers
+        of photons expressed in moles, per unit area over a time range."
       valid_min: 0
       valid_max: 500
-      calibration_date: "2021-10-15"
+      calibration_date: "2021-03-19"
+      manufacture_date: "2021-03-17"
 
   baro_pressure:
     dims: [time]
@@ -194,7 +208,7 @@ data_vars:
         uncertainty at 20 degrees C"
       valid_min: 800
       valid_max: 1100
-      calibration_date: "2021-10-15"
+      calibration_date: "2021-05-05"
 
   baro_temp:
     dims: [time]
@@ -207,6 +221,7 @@ data_vars:
       description: "Temperature measured by the BaroVUE 10 digital barometer"
       valid_min: -20
       valid_max: 40
+      calibration_date: "2021-05-05"
 
   baro_qual_metric:
     dims: [time]
@@ -221,6 +236,7 @@ data_vars:
         working well. 4-4.99, needs cal in 2-3 months. 0-3.99, needs calibration now."
       valid_min: 0
       valid_max: 6
+      calibration_date: "2021-05-05"
 
   lower_par:
     dims: [time]
@@ -236,6 +252,7 @@ data_vars:
       valid_min: 0
       valid_max: 500
       calibration_date: "2021-02-04"
+      manufacture_date: "1993-02-09"
 
   upper_par:
     dims: [time]
@@ -251,3 +268,4 @@ data_vars:
       valid_min: 0
       valid_max: 500
       calibration_date: "2021-01-14"
+      manufacture_date: "2021-01-13"
