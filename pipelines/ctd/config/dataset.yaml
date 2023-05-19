@@ -79,8 +79,8 @@ data_vars:
       units: degree_C
       coverage_content_type: physicalMeasurement
       description: "Ambient water temperature in the vicinity of the device"
-      valid_min: -20
-      valid_max: 40
+      valid_min: 0
+      valid_max: 25
 
   do:
     dims: [time]

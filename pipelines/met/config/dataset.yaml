@@ -171,7 +171,7 @@ data_vars:
         of the spectrum which is used in photosynthesis e.g. 400-700 nm. A photon flux
         is specified in terms of numbers of photons expressed in moles, per unit area."
       valid_min: 0
-      valid_max: 1000
+      valid_max: 3000
       calibration_date: "2021-03-19"
       manufacture_date: "2021-03-17"
 
@@ -191,7 +191,7 @@ data_vars:
         photosynthesis e.g. 400-700 nm. A photon flux is specified in terms of numbers
         of photons expressed in moles, per unit area over a time range."
       valid_min: 0
-      valid_max: 500
+      valid_max: 1500
       calibration_date: "2021-03-19"
       manufacture_date: "2021-03-17"
 
