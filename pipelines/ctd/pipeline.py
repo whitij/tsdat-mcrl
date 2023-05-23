@@ -35,6 +35,10 @@ class CTD(IngestPipeline):
         # Rename description to summary for CF compliance
         dataset.attrs["summary"] = dataset.attrs.pop("description")
 
+        # Conditionally change calibration date
+        if dataset.time[-1] < np.datetime64("2023-02-08T12:00:00"):
+            dataset.attrs["calibration_date"] = "2023-02-08"
+
         write_parquet(dataset, "ctd")
 
         return dataset
