@@ -32,7 +32,7 @@ class MET(IngestPipeline):
 
         # We need to add a corrective factor to early rain gauge data, add warning
         if dataset.time[-1] < np.datetime64("2023-05-03T16:00:00"):
-            dataset["rain"].data = dataset["water_level"].data * 6.76
+            dataset["rain"].data = dataset["rain"].data * 6.76
             dataset["rain"].attrs[
                 "warning"
             ] = "Sensor was miscalibrated, so applied corrective factor of 6.76"
