@@ -16,3 +16,7 @@ coords:
 data_vars:
   spectra:
     name: spectra
+  temperature:
+    name: Temperature
+  humidity:
+    name: Humidity
