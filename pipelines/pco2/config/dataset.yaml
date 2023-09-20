@@ -1,0 +1,131 @@
+attrs:
+  conventions: "CD-1.6, ACDD-1.3, IOOS-1.2"
+  featureType: timeseries
+  id: MCRLdata_met
+  infoURL: https://www.osti.gov/biblio/1842840
+  license: Freely Distributed
+  naming_authority: gov.pnnl.sequim
+  standard_name_vocabulary: CF Standard Name Table v79
+  title: MCRLdata at PNNL-Sequim - pCO2
+  description:
+    CO2 measurements from a Battelle Seaology pCO2 Monitor sensor. Measurements include
+    two concurrent readings of CO2 partial pressure in the atmosphere and seawater.
+
+  keywords: Sequim, data, marine, weather station, carbon dioxide, oxygen, humidity
+  # Attribution
+  creator_country: USA
+  creator_email: mcrldata at pnnl.gov
+  creator_institution: Pacific Northwest National Laboratory (PNNL) - Sequim
+  creator_institution_url: https://www.pnnl.gov/
+  creator_sector: other
+  creator_type: institution
+  creator_url: https://www.pnnl.gov/
+  institution: Pacific Northwest National Laboratory (PNNL)
+  publisher_country: USA
+  publisher_email: mcrldata at pnnl.gov
+  publisher_institution: Pacific Northwest National Laboratory (PNNL) - Sequim
+  publisher_url: https://www.pnnl.gov/
+
+  # Platform and Instrument
+  platform: pier
+  platform_name: mcrl_pier
+  platform_vocabulary: https://mmisw.org/ont/ioos/platform
+  instrument: In Situ/Laboratory Instruments > Chemical Meters/Analyzers > CO2 Analyzers
+  instrument_vocabulary: GCMD Instrument Keywords #https://gcmd.earthdata.nasa.gov/KeywordViewer/
+  make_model: Battelle Seaology pCO2 Monitor
+
+  # Geospatial and Time
+  geospatial_bounds: POINT(48.07930, -123.04508)
+  geospatial_bounds_crs: "EPSG:4326"
+  time_coverage_start: "2023-08-15"
+  time_coverage_resolution: "15:00"
+
+  location_id: pco2
+  dataset_name: mcrl_pier
+  qualifier: campbell_cr1000_1
+  temporal: 3hr
+  data_level: a1
+
+coords:
+  position:
+    dims: [position]
+    dtype: str
+    attrs:
+      units: "1"
+      long_name: Sensor sample type
+      description:
+        Air and "Equilibrium" (air samples taken after equilibrating with ambient water)
+        samples with circulation pump on and off
+  time:
+    dims: [time]
+    dtype: datetime64[s]
+    attrs:
+      units: Seconds since 1970-01-01 00:00:00 UTC
+      standard_name: time
+      long_name: Time
+      time_zone: UTC
+
+data_vars:
+  pCO2:
+    dims: [time, position]
+    dtype: float32
+    attrs:
+      long_name: CO2 partial pressure
+      standard_name: partial_pressure_of_carbon_dioxide_in_sea_water
+      units: ppm
+      coverage_content_type: physicalMeasurement
+      fail_min: 0
+      fail_max: 10000
+
+  O2:
+    dims: [time, position]
+    dtype: float32
+    attrs:
+      long_name: 02 partial pressure
+      standard_name: volume_fraction_of_oxygen_in_sea_water
+      units: percent
+      coverage_content_type: physicalMeasurement
+      fail_min: 0
+      fail_max: 100
+
+  pressure:
+    dims: [time, position]
+    dtype: float32
+    attrs:
+      long_name: Air Pressure
+      standard_name: air_pressure
+      units: Pa
+      coverage_content_type: physicalMeasurement
+
+  rh:
+    dims: [time, position]
+    dtype: float
+    attrs:
+      long_name: Relative Humidity (%)
+      standard_name: relative_humidity
+      units: percent
+      coverage_content_type: physicalMeasurement
+      fail_min: 0
+      fail_max: 100
+
+  temp_rh:
+    dims: [time, position]
+    dtype: float
+    attrs:
+      long_name: Temperature of relative humidity sensor
+      units: degC
+
+  temp_licor:
+    dims: [time, position]
+    dtype: float
+    attrs:
+      long_name: Temperature of Licor 850 sensor
+      units: degC
+
+  flag:
+    dims: [time, position]
+    dtype: int
+    attrs:
+      long_name: Quality Flag
+      standard_name: quality_flag
+      units: "1"

@@ -1,0 +1,18 @@
+classname: pipelines.pco2.pipeline.PCO2
+
+triggers:
+  - .*pco2.*\.log
+
+retriever:
+  path: pipelines/pco2/config/retriever.yaml
+
+dataset:
+  path: pipelines/pco2/config/dataset.yaml
+
+quality:
+  path: shared/quality.yaml
+
+storage:
+  path: shared/storage.yaml
+  overrides:
+    /parameters/storage_root: pco2

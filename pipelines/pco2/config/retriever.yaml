@@ -1,0 +1,33 @@
+classname: tsdat.io.retrievers.DefaultRetriever
+readers:
+  .*:
+    classname: pipelines.pco2.readers.ReadPCO2Logfile
+
+coords:
+  position:
+    name: position
+  time:
+    name: time
+    data_converters:
+      - classname: tsdat.io.converters.StringToDatetime
+        format: "%Y-%m-%d %H:%M:%S"
+        timezone: UTC
+
+data_vars:
+  pCO2:
+    name: pCO2[ppm]
+  O2:
+    name: O2[%]
+  pressure:
+    name: P[kPa]
+    data_converters:
+      - classname: tsdat.io.converters.UnitsConverter
+        input_units: kPa
+  rh:
+    name: RH[%]
+  temp_rh:
+    name: RH_T[degC]
+  temp_licor:
+    name: Li_T[degC]
+  flag:
+    name: Flag
