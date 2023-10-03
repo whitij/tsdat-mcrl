@@ -1,5 +1,4 @@
 import logging
-import tempfile
 import pandas as pd
 import xarray as xr
 from pathlib import Path
@@ -125,11 +124,14 @@ class MCRLdataParquetWriter(FileWriter):
                 df = pd.DataFrame(
                     {"time": ds["time"], "maxU": maxU, "maxU_qc": qc_list}
                 )
+            elif "pco2" in ds.datastream:  # special handling for pCO2 sensor
+                pco2 = ds["pco2_water"].sel(position="Equil_cycle_pump_on")
+                qc = ds["qc_pco2_water"].sel(position="Equil_cycle_pump_on")
+                df = pd.DataFrame({"time": ds["time"], "pco2": pco2, "pco2_qc": qc})
             else:
                 raise Warning(
                     "Dataset has more than one dimension and no exception for parquet."
                 )
-                return
         else:
             df = ds.to_dataframe(self.parameters.dim_order)  # type: ignore
 

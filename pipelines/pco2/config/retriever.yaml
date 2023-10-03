@@ -14,20 +14,25 @@ coords:
         timezone: UTC
 
 data_vars:
-  pCO2:
-    name: pCO2[ppm]
-  O2:
+  pco2_water:
+    name: CO2[ppm]
+  o2_water:
     name: O2[%]
+
   pressure:
     name: P[kPa]
     data_converters:
       - classname: tsdat.io.converters.UnitsConverter
         input_units: kPa
+
   rh:
     name: RH[%]
+
   temp_rh:
     name: RH_T[degC]
+
   temp_licor:
     name: Li_T[degC]
+
   flag:
     name: Flag
