@@ -8,7 +8,7 @@ from typing import Any, Dict, List, Optional
 from tsdat import FileWriter
 from tsdat.config.storage import StorageConfig
 from tsdat.config.utils import recursive_instantiate
-from tsdat.tstring import Template
+from tstring import Template
 
 
 logger = logging.getLogger(__name__)
