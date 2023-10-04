@@ -47,17 +47,6 @@ attrs:
   data_level: a1
 
 coords:
-  position:
-    dims: [position]
-    dtype: str
-    attrs:
-      units: "1"
-      long_name: Sensor sample type
-      description:
-        This sensor takes 4 measurement samples. Two air samples and two "equilibrium"
-        samples (air samples taken by bubbling air through seawater until the gas
-        exchange reaches equilibrium) are taken, each with the air circulation pump on
-        or off.
   time:
     dims: [time]
     dtype: datetime64[s]
@@ -67,53 +56,99 @@ coords:
       long_name: Time
       time_zone: UTC
 
+  position:
+    dims: [position]
+    dtype: str
+    attrs:
+      units: "1"
+      long_name: Sensor Cycle
+      description:
+        This sensor takes 4 measurement samples. Two air samples and two "equilibrium"
+        samples (air samples taken by bubbling air through seawater until the gas
+        exchange reaches equilibrium) are taken, each with the air circulation pump on
+        or off.
+
+  sample:
+    dims: [sample]
+    dtype: int8
+    attrs:
+      units: "1"
+      standard_name: number_of_observations
+      long_name: Sample Number
+
 data_vars:
   pco2_air:
-    dims: [time, position]
+    dims: [time]
     dtype: float32
     attrs:
       long_name: Partial Pressure of Carbon Dioxide in Air
       standard_name: partial_pressure_of_carbon_dioxide_in_air
+      comment: Mean of the `pco2_raw` 'Air_cycle_pump_off' samples
       units: ppm
       coverage_content_type: physicalMeasurement
       fail_min: 0
       fail_max: 10000
 
   o2_air:
-    dims: [time, position]
+    dims: [time]
     dtype: float32
     attrs:
       long_name: Percent Oxygen in Air
       standard_name: volume_fraction_of_oxygen_in_air
+      comment: Mean of the `o2_raw` 'Air_cycle_pump_off' samples
       units: percent
       coverage_content_type: physicalMeasurement
       fail_min: 0
       fail_max: 100
 
   pco2_water:
-    dims: [time, position]
+    dims: [time]
     dtype: float32
     attrs:
       long_name: Partial Pressure of Carbon Dioxide in Seawater
       standard_name: partial_pressure_of_carbon_dioxide_in_sea_water
+      comment: Mean of the `pco2_raw` 'Equil_cycle_pump_off' samples
       units: ppm
       coverage_content_type: physicalMeasurement
       fail_min: 0
       fail_max: 10000
 
   o2_water:
-    dims: [time, position]
+    dims: [time]
     dtype: float32
     attrs:
       long_name: Percent Oxygen in Seawater
       standard_name: volume_fraction_of_oxygen_in_sea_water
+      comment: Mean of the `o2_raw` 'Equil_cycle_pump_off' samples
       units: percent
       coverage_content_type: physicalMeasurement
       fail_min: 0
       fail_max: 100
 
+  pco2_raw:
+    dims: [time, position, samples]
+    dtype: float32
+    attrs:
+      long_name: Partial Pressure of Carbon Dioxide
+      units: ppm
+      ancillary_variables: pco2_air pco2_water
+      coverage_content_type: physicalMeasurement
+      fail_min: 0
+      fail_max: 10000
+
+  o2_raw:
+    dims: [time, position, samples]
+    dtype: float32
+    attrs:
+      long_name: Percent Oxygen
+      units: percent
+      ancillary_variables: o2_air o2_water
+      coverage_content_type: physicalMeasurement
+      fail_min: 0
+      fail_max: 100
+
   pressure:
-    dims: [time, position]
+    dims: [time, position, sample]
     dtype: float32
     attrs:
       long_name: Air Pressure
@@ -122,8 +157,8 @@ data_vars:
       coverage_content_type: physicalMeasurement
 
   rh:
-    dims: [time, position]
-    dtype: float
+    dims: [time, position, sample]
+    dtype: float32
     attrs:
       long_name: Relative Humidity (%)
       standard_name: relative_humidity
@@ -133,8 +168,8 @@ data_vars:
       valid_max: 100
 
   temp_rh:
-    dims: [time, position]
-    dtype: float
+    dims: [time, position, sample]
+    dtype: float32
     attrs:
       long_name: Temperature of relative humidity sensor
       standard_name: sea_water_temperature
@@ -144,8 +179,8 @@ data_vars:
       valid_max: 30
 
   temp_licor:
-    dims: [time, position]
-    dtype: float
+    dims: [time, position, sample]
+    dtype: float32
     attrs:
       long_name: Temperature of Licor 850 sensor
       standard_name: sea_water_temperature
@@ -154,9 +189,30 @@ data_vars:
       valid_min: 0
       valid_max: 30
 
-  flag:
+  zero_coeff:
+    dims: [time]
+    dtype: float32
+    attrs:
+      long_name: Zero Coefficient
+      units: "1"
+
+  span_coeff:
+    dims: [time]
+    dtype: float32
+    attrs:
+      long_name: Span Coefficient
+      units: "1"
+
+  minute:
     dims: [time, position]
-    dtype: int
+    dtype: int8
+    attrs:
+      long_name: Minute on the hour that a position cycle is run
+      units: min
+
+  flag:
+    dims: [time]
+    dtype: int8
     attrs:
       long_name: Quality Flag
       standard_name: quality_flag

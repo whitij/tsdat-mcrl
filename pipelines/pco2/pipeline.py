@@ -8,19 +8,20 @@ class PCO2(IngestPipeline):
     def hook_customize_dataset(self, dataset: xr.Dataset) -> xr.Dataset:
         # (Optional) Use this hook to modify the dataset before qc is applied
 
-        air_positions = [s for s in dataset["position"].values if "Air" in s]
+        # Set air and water sample measurements from raw pCO2 and O2 data
+        dataset["pco2_air"].values = (
+            dataset["pco2_raw"].sel(position="Air cycle pump off").mean("sample")
+        ).values
+        dataset["pco2_water"].values = (
+            dataset["pco2_raw"].sel(position="Equil cycle pump off").mean("sample")
+        ).values
 
-        # Set air samples from full variable saved in water variable
-        dataset["pco2_air"].loc[dict(position=air_positions)] = dataset[
-            "pco2_water"
-        ].sel(position=air_positions)
-        dataset["o2_air"].loc[dict(position=air_positions)] = dataset["o2_water"].sel(
-            position=air_positions
-        )
-
-        # Remove air samples from water sample variable
-        dataset["pco2_water"].loc[dict(position=air_positions)] = -9999
-        dataset["o2_water"].loc[dict(position=air_positions)] = -9999
+        dataset["o2_air"].values = (
+            dataset["o2_raw"].sel(position="Air cycle pump off").mean("sample")
+        ).values
+        dataset["o2_water"].values = (
+            dataset["o2_raw"].sel(position="Equil cycle pump off").mean("sample")
+        ).values
 
         return dataset
 

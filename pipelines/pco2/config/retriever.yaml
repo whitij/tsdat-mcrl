@@ -1,38 +1,41 @@
 classname: tsdat.io.retrievers.DefaultRetriever
 readers:
   .*:
-    classname: pipelines.pco2.readers.ReadPCO2Logfile
+    classname: tsdat..io.readers.NetCDFReader
 
 coords:
-  position:
-    name: position
   time:
     name: time
     data_converters:
       - classname: tsdat.io.converters.StringToDatetime
         format: "%Y-%m-%d %H:%M:%S"
         timezone: UTC
+  position:
+    name: position
+  sample:
+    name: sample
 
 data_vars:
-  pco2_water:
-    name: CO2[ppm]
-  o2_water:
-    name: O2[%]
-
+  pco2_raw:
+    name: co2
+  o2_raw:
+    name: o2
+  zero_coeff:
+    name: zero_coeff
+  span_coeff:
+    name: span_coeff
+  flag:
+    name: flag
+  minute:
+    name: minute
   pressure:
-    name: P[kPa]
+    name: pres
     data_converters:
       - classname: tsdat.io.converters.UnitsConverter
         input_units: kPa
-
-  rh:
-    name: RH[%]
-
-  temp_rh:
-    name: RH_T[degC]
-
   temp_licor:
-    name: Li_T[degC]
-
-  flag:
-    name: Flag
+    name: li_temp
+  rh:
+    name: rh
+  temp_rh:
+    name: rh_temp
