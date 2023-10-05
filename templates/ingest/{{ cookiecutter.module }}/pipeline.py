@@ -3,8 +3,6 @@ import xarray as xr
 # import matplotlib.pyplot as plt
 from tsdat import IngestPipeline  # , get_start_date_and_time_str, get_filename
 
-# from utils import format_time_xticks
-
 
 # DEVELOPER: Implement your pipeline and update its docstring.
 class {{ cookiecutter.classname }}(IngestPipeline):
@@ -38,7 +36,6 @@ class {{ cookiecutter.classname }}(IngestPipeline):
         #     fig, ax = plt.subplots()
         #     dataset["example_var"].plot(ax=ax, x="time")  # type: ignore
         #     fig.suptitle(f"Example Variable at {location} on {date} {time}")
-        #     format_time_xticks(ax)
         #     plot_file = get_filename(dataset, title="example_plot", extension="png")
         #     fig.savefig(tmp_dir / plot_file)
         #     plt.close(fig)
