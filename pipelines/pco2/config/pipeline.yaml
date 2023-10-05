@@ -1,7 +1,7 @@
 classname: pipelines.pco2.pipeline.PCO2
 
 triggers:
-  - .*pco2.*\.raw.nc
+  - .*pco2.*raw.*\.nc
 
 retriever:
   path: pipelines/pco2/config/retriever.yaml
