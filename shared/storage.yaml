@@ -9,7 +9,3 @@ parameters:
 
 handler:
   classname: tsdat.io.handlers.NetCDFHandler
-  parameters:
-    writer:
-      to_netcdf_kwargs:
-        unlimited_dims: time
