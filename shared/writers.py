@@ -100,10 +100,10 @@ class MCRLdataParquetWriter(FileWriter):
         to_parquet_kwargs: Dict[str, Any] = {}
         to_parquet_kwargs.update(
             dict(
-                version="1.0",
-                coerce_timestamps="ms",
                 engine="pyarrow",
                 use_dictionary=False,
+                use_deprecated_int96_timestamps=True,
+                coerce_timestamps="ms",
             )
         )
 
