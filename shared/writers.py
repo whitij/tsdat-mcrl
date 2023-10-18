@@ -99,7 +99,12 @@ class MCRLdataParquetWriter(FileWriter):
         dim_order: Optional[List[str]] = None
         to_parquet_kwargs: Dict[str, Any] = {}
         to_parquet_kwargs.update(
-            dict(coerce_timestamps="ms", engine="pyarrow", use_dictionary=False)
+            dict(
+                version="1.0",
+                coerce_timestamps="ms",
+                engine="pyarrow",
+                use_dictionary=False,
+            )
         )
 
     parameters: Parameters = Parameters()
