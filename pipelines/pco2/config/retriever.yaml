@@ -1,7 +1,7 @@
 classname: tsdat.io.retrievers.DefaultRetriever
 readers:
   .*:
-    classname: tsdat..io.readers.NetCDFReader
+    classname: tsdat.io.readers.NetCDFReader
 
 coords:
   time:

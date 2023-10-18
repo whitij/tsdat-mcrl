@@ -1,6 +1,6 @@
 # Conda environment for developing tsdat pipelines
 
-name: tsdat-pipelines
+name: tsdat-mcrl
 dependencies:
   - python=3.8
   - pip
