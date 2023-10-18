@@ -98,7 +98,9 @@ class MCRLdataParquetWriter(FileWriter):
     class Parameters(BaseModel, extra=Extra.forbid):
         dim_order: Optional[List[str]] = None
         to_parquet_kwargs: Dict[str, Any] = {}
-        to_parquet_kwargs.update(dict(engine="pyarrow", use_dictionary=False))
+        to_parquet_kwargs.update(
+            dict(coerce_timestamps="ms", engine="pyarrow", use_dictionary=False)
+        )
 
     parameters: Parameters = Parameters()
     file_extension: str = ".parquet"
