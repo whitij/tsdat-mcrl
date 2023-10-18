@@ -103,7 +103,6 @@ class MCRLdataParquetWriter(FileWriter):
                 engine="pyarrow",
                 use_dictionary=False,
                 use_deprecated_int96_timestamps=True,
-                flavor="spark",
             )
         )
 
@@ -135,7 +134,7 @@ class MCRLdataParquetWriter(FileWriter):
                 raise Warning(
                     "Dataset has more than one dimension and no exception for parquet."
                 )
-            return
+                return
         else:
             df = ds.to_dataframe(self.parameters.dim_order)  # type: ignore
 
@@ -143,6 +142,8 @@ class MCRLdataParquetWriter(FileWriter):
         for col in df.columns:
             if "qc" in col:
                 df[col] = pd.to_numeric(df[col])
+            elif "time" in col:
+                df[col] = df[col].dt.strftime("%Y-%m-%d %H:%M%S")
 
         # print(df)
         df.to_parquet(filepath, **self.parameters.to_parquet_kwargs)
