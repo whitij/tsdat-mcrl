@@ -103,7 +103,7 @@ class MCRLdataParquetWriter(FileWriter):
                 engine="pyarrow",
                 use_dictionary=False,
                 use_deprecated_int96_timestamps=True,
-                coerce_timestamps="ms",
+                flavor="spark",
             )
         )
 
