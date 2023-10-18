@@ -63,7 +63,7 @@ coords:
     attrs:
       long_name: Time (UTC)
       standard_name: time
-      units: seconds since 1970-01-01 00:00:00
+      units: seconds since 1970-01-01 00:00:00 UTC
       cf_role: timeseries_id
       coverage_content_type: coordinate
       timezone: UTC
