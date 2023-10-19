@@ -150,7 +150,7 @@ class MCRLdataParquetWriter(FileWriter):
             if "qc" in col:
                 df[col] = pd.to_numeric(df[col])
             if "time" in col:
-                df[col] = (dt642epoch(df[col]) * 1000).astype(np.int64)
+                df[col] = (dt642epoch(df[col].values) * 1000).astype(np.int64)
 
         # Manually convert time to int with milliseconds for aws athena
         if hasattr(df, "time"):
