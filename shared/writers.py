@@ -151,6 +151,10 @@ class MCRLdataParquetWriter(FileWriter):
                 df[col] = pd.to_numeric(df[col])
 
         # Manually convert time to int with milliseconds for aws athena
-        df.time = (dt642epoch(df.time.values) * 1000).astype(np.int64)
+        try:
+            df.time = (dt642epoch(df.time.values) * 1000).astype(np.int64)
+        except:
+            df["time"] = (dt642epoch(df.index.values) * 1000).astype(np.int64)
+            df = df.set_index("time")
         
         df.to_parquet(filepath, **self.parameters.to_parquet_kwargs)
