@@ -5,7 +5,7 @@ import xarray as xr
 from pathlib import Path
 from pydantic import BaseModel, Extra
 from typing import Any, Dict, List, Optional
-from mhkit.dolfyn.time import dt642epoch
+from dolfyn.time import dt642epoch
 
 from tsdat import FileWriter
 from tsdat.config.storage import StorageConfig
@@ -131,6 +131,12 @@ class MCRLdataParquetWriter(FileWriter):
                 qc_list = [int(each) for each in qc]
                 df = pd.DataFrame(
                     {"time": ds["time"], "maxU": maxU, "maxU_qc": qc_list}
+                )
+            elif "pco2" in ds.datastream:  # special handling for pCO2 sensor
+                pco2 = ds["pco2_water"].values
+                pco2_qc = ds["qc_pco2_water"].values
+                df = pd.DataFrame(
+                    {"time": ds["time"], "pco2": pco2, "pco2_qc": pco2_qc}
                 )
             else:
                 raise Warning(
