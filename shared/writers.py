@@ -1,9 +1,11 @@
 import logging
+import numpy as np
 import pandas as pd
 import xarray as xr
 from pathlib import Path
 from pydantic import BaseModel, Extra
 from typing import Any, Dict, List, Optional
+from mhkit.dolfyn.time import dt642epoch
 
 from tsdat import FileWriter
 from tsdat.config.storage import StorageConfig
@@ -134,7 +136,6 @@ class MCRLdataParquetWriter(FileWriter):
                 raise Warning(
                     "Dataset has more than one dimension and no exception for parquet."
                 )
-                return
         else:
             df = ds.to_dataframe(self.parameters.dim_order)  # type: ignore
 
@@ -142,8 +143,8 @@ class MCRLdataParquetWriter(FileWriter):
         for col in df.columns:
             if "qc" in col:
                 df[col] = pd.to_numeric(df[col])
-            # elif "time" in col:
-            # df[col] = df[col].dt.strftime("%Y-%m-%d %H:%M:%S")
 
-        # print(df)
+        # Manually convert time to int with milliseconds for aws athena
+        df.time = (dt642epoch(df.time.values) * 1000).astype(np.int64)
+        
         df.to_parquet(filepath, **self.parameters.to_parquet_kwargs)

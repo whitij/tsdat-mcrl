@@ -4,7 +4,7 @@ import xarray as xr
 import numpy as np
 
 from tsdat import DataReader
-import dolfyn
+from mhkit import dolfyn
 
 
 class ADCPDataReader(DataReader):
