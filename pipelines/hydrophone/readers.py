@@ -32,7 +32,10 @@ class HydrophoneReader(DataReader):
 
     def read(self, input_key: str) -> Union[xr.Dataset, Dict[str, xr.Dataset]]:
         # read text file
-        dat = pd.read_csv(input_key, header=26, sep="\t")
+        if "SCF" in input_key:
+            dat = pd.read_csv(input_key, header=26, sep="\t")
+        elif "RBF" in input_key:
+            dat = pd.read_csv(input_key, header=28, sep="\t")
 
         # extract frequency vector
         frequency = [int(x) for x in dat.columns.values.tolist()[6:]]

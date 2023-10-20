@@ -1,0 +1,142 @@
+attrs:
+  # https://ioos.github.io/ioos-metadata/ioos-metadata-profile-v1-2.html
+  # https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3
+  # Dataset Description
+  conventions: "CD-1.6, ACDD-1.3, IOOS-1.2"
+  featureType: timeseries
+  id: MCRLdata_hydrophone
+  infoURL: https://www.osti.gov/biblio/1842840
+  license: Freely Distributed
+  naming_authority: gov.pnnl.sequim
+  standard_name_vocabulary: CF Standard Name Table v79
+  title: MCRLdata at PNNL-Sequim - Hydrophone
+  description: >-
+    An Ocean Sonics icListen RB9-ETH-HF hydrophone was installed on the Marine and
+    Coastal Research Laboratory (MCRL) pier at the Pacific Northwest National Laboratory
+    (PNNL) campus in Sequim, Washington. This instrument is located 2 ft above the
+    seafloor with the sensor directed up, and measures average frequency spectra between
+    0 and 200 kHz, which can measures sources of sound such as passing boats, marine
+    mammals, and flow noise. This deployment is part of the MCRLdata project to
+    establish long-term marine monitoring at the PNNL-Sequim Campus.
+  keywords: Sequim, data, marine, underwater sound, hydrophone
+  # Attribution
+  creator_country: USA
+  creator_email: mcrldata at pnnl.gov
+  creator_institution: Pacific Northwest National Laboratory (PNNL) - Sequim
+  creator_institution_url: https://www.pnnl.gov/
+  creator_sector: other
+  creator_type: institution
+  creator_url: https://www.pnnl.gov/
+  institution: Pacific Northwest National Laboratory (PNNL)
+  publisher_country: USA
+  publisher_email: mcrldata at pnnl.gov
+  publisher_institution: Pacific Northwest National Laboratory (PNNL) - Sequim
+  publisher_url: https://www.pnnl.gov/
+
+  # Platform and Instrument
+  platform: pier
+  platform_name: mcrl_pier
+  platform_vocabulary: https://mmisw.org/ont/ioos/platform
+  instrument:
+    In Situ/Laboratory Instruments > Profilers/Sounders > Acoustic Sounders >
+    Hydrophones
+  instrument_vocabulary: GCMD Instrument Keywords #https://gcmd.earthdata.nasa.gov/KeywordViewer/
+  make_model: Ocean Sonics icListen RB9-ETH-HF
+
+  # Geospatial and Time
+  geospatial_bounds: POINT(48.07927 -123.04506)
+  geospatial_bounds_crs: "EPSG:4326"
+  time_coverage_start: "2023-10-20"
+  time_coverage_resolution: "5:00"
+
+  # Don't delete these... they will be important for secondary pipelines
+  location_id: hydrophone
+  dataset_name: mcrl_pier
+  qualifier: oceansonics_iclisten_2
+  temporal: 15min
+  data_level: a1
+
+coords:
+  time:
+    dims: [time]
+    dtype: datetime64[ms]
+    attrs:
+      long_name: Time (UTC)
+      standard_name: time
+      units: seconds since 1970-01-01 00:00:00 UTC
+      cf_role: timeseries_id
+      coverage_content_type: coordinate
+      timezone: UTC
+
+  frequency:
+    dims: [frequency]
+    dtype: int
+    attrs:
+      long_name: Frequency (Hz)
+      standard_name: sound_frequency
+      units: s-1
+      coverage_content_type: coordinate
+
+data_vars:
+  spectra:
+    dims: [time, frequency]
+    dtype: float
+    attrs:
+      long_name: Sound Frequency Spectra (dB)
+      standard_name: sound_pressure_level_in_water
+      units: dB re 1uPa
+      coverage_content_type: physicalMeasurement
+      description: >-
+        Frequency spectra at bands between 10 Hz-204 kHz. One 5-minute averaged reading
+        every 15 minutes.
+      valid_min: 50
+      valid_max: 150
+
+  SPL:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Sound Pressure Level (dB)
+      standard_name: sound_pressure_level_in_water
+      units: dB re 1uPa
+      coverage_content_type: physicalMeasurement
+      description: >-
+        "Sound pressure is the difference from the local ambient pressure caused by a
+        sound wave at a particular location and time. Sound pressure level in water is
+        expressed on a logarithmic scale with reference to a sound pressure of 1e-6 Pa.
+        Lp = 20 log10(p/p0) where Lp is the sound pressure level, p is the rms sound
+        pressure and p0 is the reference sound pressure."
+      valid_min: 50
+      valid_max: 150
+
+  # Temperature and humidity are internal measurements, for monitoring device health
+  # QA/QC checks should occur on the second order pipeline with NetCDF files
+  temperature:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Internal Temperature (degC)
+      standard_name: temperature_of_sensor_in_sea_water
+      units: degree_C
+      coverage_content_type: physicalMeasurement
+      description: >-
+        "Temperature_of_sensor_in_sea_water is the internal instrument temperature used
+        in determining device health; it is not a measurement of the ambient water
+        temperature."
+      valid_min: -20
+      valid_max: 40
+
+  humidity:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Internal Relative Humidity (%)
+      standard_name: relative_humidity_of_sensor_in_sea_water
+      units: percent
+      coverage_content_type: physicalMeasurement
+      description: >-
+        "Relative_humidity_of_sensor_in_sea_water is the internal instrument relative
+        humidity  used in determining device health; it is not a measurement of the
+        ambient water relative  humidity."
+      valid_min: 0
+      valid_max: 50

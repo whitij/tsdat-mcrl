@@ -1,13 +1,13 @@
 classname: pipelines.hydrophone.pipeline.Hydrophone
 
 triggers:
-  - .*SCF.*\.txt
+  - .*RBF.*\.txt
 
 retriever:
   path: pipelines/hydrophone/config/retriever.yaml
 
 dataset:
-  path: pipelines/hydrophone/config/dataset.yaml
+  path: pipelines/hydrophone/config/dataset_RB9.yaml
 
 quality:
   path: shared/quality.yaml
