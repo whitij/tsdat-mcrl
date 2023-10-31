@@ -141,10 +141,6 @@ class MCRLdataParquetWriter(FileWriter):
                 qc_o2_water = ds["qc_o2_water"].values
                 o2_air = ds["o2_air"].values
                 qc_o2_air = ds["qc_o2_air"].values
-                air_pressure = ds["pressure"].values
-                qc_air_pressure = ds["qc_pressure"].values
-                rh = ds["rh"].values
-                qc_rh = ds["qc_rh"].values
                 df = pd.DataFrame(
                     {
                         "time": ds["time"],
@@ -156,10 +152,6 @@ class MCRLdataParquetWriter(FileWriter):
                         "qc_o2_water": qc_o2_water,
                         "o2_air": o2_air,
                         "qc_o2_air": qc_o2_air,
-                        "air_pressure": air_pressure,
-                        "qc_air_pressure": qc_air_pressure,
-                        "rh": rh,
-                        "qc_rh": qc_rh,
                     }
                 )
             else:
