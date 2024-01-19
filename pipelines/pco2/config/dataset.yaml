@@ -86,8 +86,8 @@ data_vars:
       comment: Mean of the `pco2_raw` 'Air_cycle_pump_off' samples
       units: ppm
       coverage_content_type: physicalMeasurement
-      fail_min: 0
-      fail_max: 10000
+      valid_min: 0
+      valid_max: 10000
 
   o2_air:
     dims: [time]
@@ -98,8 +98,8 @@ data_vars:
       comment: Mean of the `o2_raw` 'Air_cycle_pump_off' samples
       units: percent
       coverage_content_type: physicalMeasurement
-      fail_min: 0
-      fail_max: 100
+      valid_min: 0
+      valid_max: 100
 
   pco2_water:
     dims: [time]
@@ -110,8 +110,8 @@ data_vars:
       comment: Mean of the `pco2_raw` 'Equil_cycle_pump_off' samples
       units: ppm
       coverage_content_type: physicalMeasurement
-      fail_min: 0
-      fail_max: 10000
+      valid_min: 0
+      valid_max: 10000
 
   o2_water:
     dims: [time]
@@ -122,8 +122,8 @@ data_vars:
       comment: Mean of the `o2_raw` 'Equil_cycle_pump_off' samples
       units: percent
       coverage_content_type: physicalMeasurement
-      fail_min: 0
-      fail_max: 100
+      valid_min: 0
+      valid_max: 100
 
   pco2_raw:
     dims: [time, position, samples]
@@ -133,8 +133,8 @@ data_vars:
       units: ppm
       ancillary_variables: pco2_air pco2_water
       coverage_content_type: physicalMeasurement
-      fail_min: 0
-      fail_max: 10000
+      valid_min: 0
+      valid_max: 10000
 
   o2_raw:
     dims: [time, position, samples]
@@ -144,8 +144,8 @@ data_vars:
       units: percent
       ancillary_variables: o2_air o2_water
       coverage_content_type: physicalMeasurement
-      fail_min: 0
-      fail_max: 100
+      valid_min: 0
+      valid_max: 100
 
   pressure:
     dims: [time, position, sample]
