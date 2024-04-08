@@ -38,3 +38,11 @@ data_vars:
     name: PAR_lower_Avg
   upper_par:
     name: PAR_upper_Avg
+  co2_avg:
+    name: LI850_CO2_Avg
+  h20_avg:
+    name: LI850_H2O_Avg
+  LI850_temp_avg:
+    name: LI850_Temp_Avg
+  LI850_pres_avg:
+    name: LI_Pres_Avg

@@ -269,3 +269,61 @@ data_vars:
       valid_max: 500
       calibration_date: "2021-01-14"
       manufacture_date: "2021-01-13"
+
+  co2_avg:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Average Carbon Dioxide (ppm)
+      standard_name: mass_fraction_of_carbon_dioxide_in_air
+      units: ppm
+      coverage_content_type: physicalMeasurement
+      description:
+        "Carbon dioxide measurement in air, as measured by an LI-850 gas analyzer, using
+        non-dispersive infrared. 1.5% accuracy in a measurement range from 0 to 20,000
+        ppm."
+      valid_min: 1.5
+      valid_max: 20000
+      calibration_date: "2023-02-02"
+
+  h2o_avg:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Average Water Vapor (mmol/mol)
+      standard_name: mass_fraction_of_water_vapor_in_air
+      units: mmol mol-1
+      coverage_content_type: physicalMeasurement
+      description:
+        "Water vapor measurement in air, as measured by an LI-850 gas analyzer, using
+        non-dispersive infrared. 1.5% accuracy in a measurement range from 0 to 60
+        mmol/mol."
+      valid_min: 0.015
+      valid_max: 60
+      calibration_date: "2023-02-02"
+
+  LI850_temp_avg:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Average Air Temperature (degC) on LI-850
+      standard_name: air_temperature
+      units: degree_C
+      coverage_content_type: physicalMeasurement
+      description: "Average ambient air temperature measured by the LI-850."
+      valid_min: -20
+      valid_max: 60
+      calibration_date: "2023-02-02"
+
+  LI850_pres_avg:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Average Barometric Pressure (kPa)
+      standard_name: air_pressure
+      units: kPa
+      coverage_content_type: physicalMeasurement
+      description: "Barometric pressure measured by the LI-850."
+      valid_min: 50
+      valid_max: 110
+      calibration_date: "2023-02-02"
